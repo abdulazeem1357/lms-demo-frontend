@@ -1,0 +1,128 @@
+{
+    "assignmentSubmissions": [
+      {
+        "submissionId": "s1a1r1a1-b2c3-d4e5-f6g7-h8i9j0k1l2m3",
+        "assignmentId": "a1r1a1b2-c3d4-e5f6-g7h8-i9j0k1l2m3n4",
+        "userId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+        "submittedAt": "2025-05-14T10:30:00Z",
+        "fileName": "Alice_React_Component.zip",
+        "fileSize": 15360,
+        "contentType": "application/zip",
+        "fileUrl": "https://cdn.lms.example.com/submissions/s1a1r1a1/Alice_React_Component.zip"
+      },
+      {
+        "submissionId": "s2a2r1b2-c3d4-e5f6-g7h8-i9j0k1l2m3n4",
+        "assignmentId": "a2r1b2c3-d4e5-f6g7-h8i9-j0k1l2m3n4o5",
+        "userId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+        "submittedAt": "2025-05-20T15:00:00Z",
+        "fileName": "react-counter-hooks.js",
+        "fileSize": 2048,
+        "contentType": "application/javascript",
+        "fileUrl": "https://cdn.lms.example.com/submissions/s2a2r1b2/react-counter-hooks.js"
+      },
+      {
+        "submissionId": "s3a3j1c3-d4e5-f6g7-h8i9-j0k1l2m3n4o5",
+        "assignmentId": "a3j1c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
+        "userId": "d4e5f6a7-b8c9-0123-4567-890abcdef012",
+        "submittedAt": "2025-05-09T22:05:00Z",
+        "fileName": "async_refactor_diana.ts",
+        "fileSize": 3150,
+        "contentType": "application/typescript",
+        "fileUrl": "https://cdn.lms.example.com/submissions/s3a3j1c3/async_refactor_diana.ts"
+      }
+    ],
+    "quizSubmissions": [
+      {
+        "submissionId": "sq1r1a1b-2c3d-4e5f-6g7h-8i9j0k1l2m3n",
+        "quizId": "q1r1a1b2-c3d4-e5f6-g7h8-i9j0k1l2m3n4",
+        "userId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+        "submittedAt": "2025-04-05T08:30:00Z",
+        "status": "graded",
+        "autoGraded": true,
+        "answers": [
+          {
+            "questionId": "q1r1q1",
+            "type": "single_choice",
+            "answer": "optionB",
+            "isCorrect": true,
+            "score": 10,
+            "feedback": null
+          },
+          {
+            "questionId": "q1r1q2",
+            "type": "true_false",
+            "answer": "true",
+            "isCorrect": false,
+            "score": 0,
+            "feedback": "Components must return a single root element."
+          },
+          {
+            "questionId": "q1r1q3",
+            "type": "short_answer",
+            "answer": "props",
+            "isCorrect": null,
+            "score": 8,
+            "feedback": "Correct term used."
+          }
+        ],
+        "overallFeedback": "Good understanding of the basics, review component return rules.",
+        "totalScore": 18
+      },
+      {
+        "submissionId": "sq2r1b2c-3d4e-5f6g-7h8i-9j0k1l2m3n4o",
+        "quizId": "q2r1b2c3-d4e5-f6g7-h8i9-j0k1l2m3n4o5",
+        "userId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+        "submittedAt": "2025-04-13T09:45:10Z",
+        "status": "graded",
+        "autoGraded": true,
+        "answers": [
+          {
+            "questionId": "q2r1q1",
+            "type": "multiple_choice",
+            "answer": ["optionA", "optionC"],
+            "isCorrect": true,
+            "score": 15,
+            "feedback": null
+          },
+          {
+            "questionId": "q2r1q2",
+            "type": "single_choice",
+            "answer": "optionD",
+            "isCorrect": true,
+            "score": 10,
+            "feedback": null
+          }
+        ],
+        "overallFeedback": "Excellent work on hooks!",
+        "totalScore": 25
+      },
+      {
+        "submissionId": "sq3j1c3d-4e5f-6g7h-8i9j-0k1l2m3n4o5p",
+        "quizId": "q3j1c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
+        "userId": "d4e5f6a7-b8c9-0123-4567-890abcdef012",
+        "submittedAt": "2025-03-17T10:25:00Z",
+        "status": "pending",
+        "autoGraded": false,
+        "answers": [
+          {
+            "questionId": "q3j1q1",
+            "type": "short_answer",
+            "answer": "Arrow functions provide lexical this binding.",
+            "isCorrect": null,
+            "score": 0,
+            "feedback": null
+          },
+          {
+            "questionId": "q3j1q2",
+            "type": "true_false",
+            "answer": "true",
+            "isCorrect": true,
+            "score": 5,
+            "feedback": null
+          }
+        ],
+        "overallFeedback": null,
+        "totalScore": 0
+      }
+    ]
+  }

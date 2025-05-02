@@ -1,0 +1,14 @@
+[
+  {
+    "id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+    "name": "Admin"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "name": "Instructor"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+    "name": "Student"
+  }
+]

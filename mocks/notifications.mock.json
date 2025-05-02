@@ -1,0 +1,102 @@
+{
+    "history": [
+      {
+        "notificationId": "n1a2b3c4-d5e6-7f8g-9h0i-1j2k3l4m5n6o",
+        "message": "Reminder: Assignment 1 for Introduction to React is due soon!",
+        "channels": ["email", "in-app"],
+        "status": "delivered",
+        "sentAt": "2025-05-13T09:00:00Z"
+      },
+      {
+        "notificationId": "n2b3c4d5-e6f7-8g9h-0i1j-2k3l4m5n6o7p",
+        "message": "New Lecture Available: 'Deep Dive into useEffect' in Introduction to React.",
+        "channels": ["in-app"],
+        "status": "sent",
+        "sentAt": "2025-04-11T14:05:00Z"
+      },
+      {
+        "notificationId": "n3c4d5e6-f7g8-9h0i-1j2k-3l4m5n6o7p8q",
+        "message": "Your submission for 'Quiz 1: React Basics' has been graded.",
+        "channels": ["email"],
+        "status": "failed",
+        "sentAt": "2025-04-05T08:35:00Z"
+      },
+      {
+        "notificationId": "n4d5e6f7-g8h9-0i1j-2k3l-4m5n6o7p8q9r",
+        "message": "Live Q&A Session for React Hooks starts in 1 hour!",
+        "channels": ["in-app"],
+        "status": "delivered",
+        "sentAt": "2025-05-10T13:00:00Z"
+      }
+    ],
+    "details": [
+      {
+        "notificationId": "n1a2b3c4-d5e6-7f8g-9h0i-1j2k3l4m5n6o",
+        "audience": {
+          "userIds": ["a1b2c3d4-e5f6-7890-1234-567890abcdef"]
+        },
+        "message": "Reminder: Assignment 1 for Introduction to React is due soon!",
+        "channels": [
+          {
+            "type": "email",
+            "status": "delivered",
+            "sentAt": "2025-05-13T09:00:00Z",
+            "deliveredAt": "2025-05-13T09:00:05Z"
+          },
+          {
+            "type": "in-app",
+            "status": "delivered",
+            "sentAt": "2025-05-13T09:00:00Z",
+            "deliveredAt": "2025-05-13T09:00:01Z"
+          }
+        ]
+      },
+      {
+        "notificationId": "n2b3c4d5-e6f7-8g9h-0i1j-2k3l4m5n6o7p",
+        "audience": {
+          "courseId": "f7a1b2c3-d4e5-6789-0abc-1d2e3f4a5b6c"
+        },
+        "message": "New Lecture Available: 'Deep Dive into useEffect' in Introduction to React.",
+        "channels": [
+          {
+            "type": "in-app",
+            "status": "sent",
+            "sentAt": "2025-04-11T14:05:00Z"
+          }
+        ]
+      },
+      {
+        "notificationId": "n3c4d5e6-f7g8-9h0i-1j2k-3l4m5n6o7p8q",
+        "audience": {
+          "userIds": ["a1b2c3d4-e5f6-7890-1234-567890abcdef"]
+        },
+        "message": "Your submission for 'Quiz 1: React Basics' has been graded.",
+        "channels": [
+          {
+            "type": "email",
+            "status": "failed",
+            "sentAt": "2025-04-05T08:35:00Z",
+            "error": {
+              "code": "MAILBOX_FULL",
+              "message": "Recipient mailbox is full."
+            }
+          }
+        ]
+      },
+      {
+        "notificationId": "n4d5e6f7-g8h9-0i1j-2k3l-4m5n6o7p8q9r",
+        "audience": {
+          "all": true
+        },
+        "message": "Live Q&A Session for React Hooks starts in 1 hour!",
+        "channels": [
+          {
+            "type": "in-app",
+            "status": "delivered",
+            "sentAt": "2025-05-10T13:00:00Z",
+            "deliveredAt": "2025-05-10T13:00:02Z"
+          }
+        ]
+      }
+    ]
+  }

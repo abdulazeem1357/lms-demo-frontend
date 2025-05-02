@@ -1,0 +1,119 @@
+{
+    "f7a1b2c3-d4e5-6789-0abc-1d2e3f4a5b6c": [
+      {
+        "id": "m1r1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
+        "title": "Module 1: React Fundamentals",
+        "order": 1,
+        "chapters": [
+          {
+            "id": "c1r1d2e3-f4g5-h6i7-j8k9-l0m1n2o3p4q5",
+            "title": "Chapter 1: Introduction to React & JSX",
+            "order": 1
+          },
+          {
+            "id": "c1r2d3e4-f5g6-h7i8-j9k0-l1m2n3o4p5q6",
+            "title": "Chapter 2: Components, Props, and State",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "m1r2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6",
+        "title": "Module 2: React Hooks",
+        "order": 2,
+        "chapters": [
+          {
+            "id": "c1r3d4e5-f6g7-h8i9-j0k1-l2m3n4o5p6q7",
+            "title": "Chapter 1: useState and useEffect",
+            "order": 1
+          },
+          {
+            "id": "c1r4d5e6-f7g8-h9i0-j1k2-l3m4n5o6p7q8",
+            "title": "Chapter 2: useContext and Custom Hooks",
+            "order": 2
+          }
+        ]
+      }
+    ],
+    "a2b3c4d5-e6f7-8901-2abc-3d4e5f6a7b8c": [
+      {
+        "id": "m2j1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
+        "title": "Module 1: Modern JavaScript Features",
+        "order": 1,
+        "chapters": [
+          {
+            "id": "c2j1d2e3-f4g5-h6i7-j8k9-l0m1n2o3p4q5",
+            "title": "Chapter 1: Arrow Functions, Destructuring, Spread/Rest",
+            "order": 1
+          },
+          {
+            "id": "c2j2d3e4-f5g6-h7i8-j9k0-l1m2n3o4p5q6",
+            "title": "Chapter 2: Promises and Async/Await",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "m2j2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6",
+        "title": "Module 2: Advanced Concepts",
+        "order": 2,
+        "chapters": [
+          {
+            "id": "c2j3d4e5-f6g7-h8i9-j0k1-l2m3n4o5p6q7",
+            "title": "Chapter 1: Closures, Scope, and Hoisting",
+            "order": 1
+          }
+        ]
+      }
+    ],
+    "b3c4d5e6-f7a8-9012-3bcd-4e5f6a7b8c9d": [
+      {
+        "id": "m3t1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
+        "title": "Module 1: TypeScript Basics",
+        "order": 1,
+        "chapters": [
+          {
+            "id": "c3t1d2e3-f4g5-h6i7-j8k9-l0m1n2o3p4q5",
+            "title": "Chapter 1: Types, Interfaces, and Enums",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "m3t2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6",
+        "title": "Module 2: Generics and Advanced Types",
+        "order": 2,
+        "chapters": [
+          {
+            "id": "c3t2d4e5-f6g7-h8i9-j0k1-l2m3n4o5p6q7",
+            "title": "Chapter 1: Introduction to Generics",
+            "order": 1
+          },
+          {
+            "id": "c3t3d5e6-f7g8-h9i0-j1k2-l3m4n5o6p7q8",
+            "title": "Chapter 2: Utility Types and Conditional Types",
+            "order": 2
+          }
+        ]
+      }
+    ],
+    "c4d5e6f7-a8b9-0123-4cde-5f6a7b8c9d0e": [
+      {
+        "id": "m4u1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
+        "title": "Module 1: Core UI/UX Principles",
+        "order": 1,
+        "chapters": [
+          {
+            "id": "c4u1d2e3-f4g5-h6i7-j8k9-l0m1n2o3p4q5",
+            "title": "Chapter 1: User Research and Personas",
+            "order": 1
+          },
+          {
+            "id": "c4u2d3e4-f5g6-h7i8-j9k0-l1m2n3o4p5q6",
+            "title": "Chapter 2: Wireframing and Prototyping",
+            "order": 2
+          }
+        ]
+      }
+    ]
+  }

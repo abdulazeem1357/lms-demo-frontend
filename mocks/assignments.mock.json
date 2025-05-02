@@ -1,0 +1,38 @@
+[
+    {
+      "id": "a1r1a1b2-c3d4-e5f6-g7h8-i9j0k1l2m3n4",
+      "moduleId": "m1r1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
+      "title": "Assignment 1: Build a Simple React Component",
+      "description": "Create a functional component that displays user data passed via props.",
+      "dueDate": "2025-05-15T23:59:00Z",
+      "createdAt": "2025-04-06T10:00:00Z",
+      "updatedAt": "2025-04-06T11:00:00Z"
+    },
+    {
+      "id": "a2r1b2c3-d4e5-f6g7-h8i9-j0k1l2m3n4o5",
+      "moduleId": "m1r2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6",
+      "title": "Assignment 2: Implement a Counter with Hooks",
+      "description": "Build a counter component using useState and useEffect hooks.",
+      "dueDate": "2025-05-22T23:59:00Z",
+      "createdAt": "2025-04-15T09:00:00Z",
+      "updatedAt": "2025-04-15T09:00:00Z"
+    },
+    {
+      "id": "a3j1c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
+      "moduleId": "m2j1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
+      "title": "Assignment 1: Refactor with Async/Await",
+      "description": "Refactor the provided promise-based code to use async/await syntax.",
+      "dueDate": "2025-05-10T23:59:00Z",
+      "createdAt": "2025-03-20T14:00:00Z",
+      "updatedAt": "2025-03-21T10:30:00Z"
+    },
+    {
+      "id": "a4t2d4e5-f6g7-h8i9-j0k1-l2m3n4o5p6q7",
+      "moduleId": "m3t2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6",
+      "title": "Assignment 1: Create a Generic Function",
+      "description": "Write a generic TypeScript function that can operate on different data types while maintaining type safety.",
+      "dueDate": "2025-05-18T23:59:00Z",
+      "createdAt": "2025-03-10T11:00:00Z",
+      "updatedAt": "2025-03-10T11:00:00Z"
+    }
+  ]

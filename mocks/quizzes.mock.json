@@ -1,0 +1,33 @@
+[
+    {
+      "id": "q1r1a1b2-c3d4-e5f6-g7h8-i9j0k1l2m3n4",
+      "moduleId": "m1r1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
+      "title": "Quiz 1: React Basics",
+      "description": "Test your knowledge of fundamental React concepts like JSX, components, and props.",
+      "createdAt": "2025-04-05T08:00:00Z",
+      "updatedAt": "2025-04-05T08:00:00Z"
+    },
+    {
+      "id": "q2r1b2c3-d4e5-f6g7-h8i9-j0k1l2m3n4o5",
+      "moduleId": "m1r2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6",
+      "title": "Quiz 2: Understanding Hooks",
+      "description": "Assess your understanding of useState, useEffect, and useContext.",
+      "createdAt": "2025-04-13T09:00:00Z",
+      "updatedAt": "2025-04-14T10:15:00Z"
+    },
+    {
+      "id": "q3j1c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
+      "moduleId": "m2j1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
+      "title": "Quiz 1: ES6+ Features",
+      "description": "Check your grasp of modern JavaScript syntax and features.",
+      "createdAt": "2025-03-17T10:00:00Z",
+      "updatedAt": "2025-03-17T10:00:00Z"
+    },
+    {
+      "id": "q4t1d4e5-f6g7-h8i9-j0k1-l2m3n4o5p6q7",
+      "moduleId": "m3t1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
+      "title": "Quiz 1: TypeScript Fundamentals",
+      "createdAt": "2025-03-01T11:00:00Z",
+      "updatedAt": "2025-03-01T11:00:00Z"
+    }
+  ]

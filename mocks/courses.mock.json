@@ -1,0 +1,38 @@
+[
+  {
+    "id": "f7a1b2c3-d4e5-6789-0abc-1d2e3f4a5b6c",
+    "title": "Introduction to React",
+    "description": "Learn the basics of React, components, and hooks.",
+    "category": "Web Development",
+    "difficulty": "beginner",
+    "createdAt": "2025-04-01T09:00:00Z",
+    "updatedAt": "2025-04-10T10:30:00Z"
+  },
+  {
+    "id": "a2b3c4d5-e6f7-8901-2abc-3d4e5f6a7b8c",
+    "title": "Advanced JavaScript",
+    "description": "Deep dive into ES6+ features, patterns, and best practices.",
+    "category": "Programming Languages",
+    "difficulty": "advanced",
+    "createdAt": "2025-03-15T11:20:00Z",
+    "updatedAt": "2025-04-20T12:45:00Z"
+  },
+  {
+    "id": "b3c4d5e6-f7a8-9012-3bcd-4e5f6a7b8c9d",
+    "title": "Data Structures in TypeScript",
+    "description": "Implement core data structures using TypeScript and generics.",
+    "category": "Computer Science",
+    "difficulty": "intermediate",
+    "createdAt": "2025-02-28T08:10:00Z",
+    "updatedAt": "2025-03-05T14:00:00Z"
+  },
+  {
+    "id": "c4d5e6f7-a8b9-0123-4cde-5f6a7b8c9d0e",
+    "title": "UI/UX Design Fundamentals",
+    "description": "Principles of user interface and experience design.",
+    "category": "Design",
+    "difficulty": "beginner",
+    "createdAt": "2025-04-05T07:30:00Z",
+    "updatedAt": "2025-04-07T09:15:00Z"
+  }
+]
