@@ -1,0 +1,180 @@
+import { ReactNode, createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { IUser } from '../types/user.types';
+import { apiClient } from '../api/client';
+
+// Auth service response types
+interface IAuthResponse {
+  user: IUser;
+  accessToken: string;
+}
+
+interface ILoginRequest {
+  username: string;
+  password: string;
+}
+
+interface IRegisterRequest extends Omit<IUser, 'id' | 'isActive' | 'createdAt' | 'updatedAt'> {
+  password: string;
+}
+
+interface AuthContextType {
+  user: IUser | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+  login: (credentials: ILoginRequest) => Promise<void>;
+  register: (userData: IRegisterRequest) => Promise<void>;
+  logout: () => Promise<void>;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+/**
+ * Sets the auth token in localStorage.
+ * @param token The JWT access token to store.
+ */
+export function setAuthToken(token: string | null): void {
+  if (token) {
+    localStorage.setItem('authToken', token);
+  } else {
+    localStorage.removeItem('authToken');
+  }
+}
+
+// Mock auth service functions - replace with real API calls
+const login = async (credentials: ILoginRequest): Promise<IAuthResponse> => {
+  const response = await apiClient.post<IAuthResponse>('/auth/login', credentials);
+  return response.data;
+};
+
+const register = async (userData: IRegisterRequest): Promise<IAuthResponse> => {
+  const response = await apiClient.post<IAuthResponse>('/auth/register', userData);
+  return response.data;
+};
+
+const logout = async (): Promise<void> => {
+  await apiClient.post('/auth/logout');
+};
+
+/**
+ * Auth provider component that manages authentication state and operations.
+ */
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState<IUser | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  // Check for existing token and restore user session on mount
+  useEffect(() => {
+    const initAuth = async () => {
+      try {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+          // TODO: Add token validation or user info retrieval
+          // Temporary: Set authenticated without user data
+          setUser({
+            id: 'temp',
+            username: 'user123',
+            email: 'user@example.com',
+            firstName: 'User',
+            lastName: 'Test',
+            role: 'Student',
+            isActive: true,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+          });
+        }
+      } catch (err) {
+        console.error('Authentication initialization error:', err);
+        setAuthToken(null);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    initAuth();
+  }, []);
+
+  /**
+   * Authenticate user with credentials
+   */
+  const handleLogin = useCallback(async (credentials: ILoginRequest) => {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const response = await login(credentials);
+      setAuthToken(response.accessToken);
+      setUser(response.user);
+      navigate('/dashboard');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Login failed';
+      setError(errorMessage);
+      console.error('Login error:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [navigate]);
+
+  /**
+   * Register a new user
+   */
+  const handleRegister = useCallback(async (userData: IRegisterRequest) => {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const response = await register(userData);
+      setAuthToken(response.accessToken);
+      setUser(response.user);
+      navigate('/dashboard');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Registration failed';
+      setError(errorMessage);
+      console.error('Registration error:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [navigate]);
+
+  /**
+   * Logout the current user
+   */
+  const handleLogout = useCallback(async () => {
+    try {
+      await logout();
+    } catch (err) {
+      console.error('Logout error:', err);
+    } finally {
+      setAuthToken(null);
+      setUser(null);
+      navigate('/login');
+    }
+  }, [navigate]);
+
+  const value = {
+    user,
+    isAuthenticated: !!user,
+    isLoading,
+    error,
+    login: handleLogin,
+    register: handleRegister,
+    logout: handleLogout,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+/**
+ * Hook for accessing the auth context.
+ * @throws {Error} If used outside of AuthProvider
+ */
+export function useAuth(): AuthContextType {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+}
