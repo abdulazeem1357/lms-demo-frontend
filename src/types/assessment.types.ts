@@ -60,6 +60,7 @@ export interface IAssignmentGradeResponse {
  */
 export interface IQuizSubmission {
   submissionId: string;
+  quizId: string;
   userId: string;
   submittedAt: string;      // ISO 8601 timestamp
   status: 'pending' | 'graded';
