@@ -39,10 +39,10 @@ The LMS Student Portal is a React/TypeScript SPA enabling students to:
 ## 5. Tech Stack & Tooling  
 - **Build & Dev:** Vite (v5+), npm scripts: `dev`, `build`, `preview`, `lint`, `test`  
 - **Language & Framework:** React 19 (Function Components + Hooks), TypeScript v5+ (strict)  
-- **Styling:** TailwindCSS v3+, CSS Modules (`*.module.css`), Heroicons React, react-icons  
+- **Styling:** TailwindCSS v4+, CSS Modules (`*.module.css`), Heroicons React, react-icons  
 - **State & Data:** @tanstack/react-query, Axios (interceptors for auth & errors)  
 - **Forms & Validation:** react-hook-form v7+, yup for schemas  
-- **Routing:** React Router v6+  
+- **Routing:** React Router v7+  
 - **Animations:** framer-motion  
 - **Performance:** react-lazy-load-image-component, react-window  
 - **Utilities:** date-fns, uuid, lodash-es (import specific functions)  
