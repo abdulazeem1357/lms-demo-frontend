@@ -67,7 +67,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const triggerRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Theme classes
   const themeClasses = {
@@ -149,29 +149,28 @@ export const Tooltip: React.FC<TooltipProps> = ({
     },
   };
 
-  // Arrow position classes
+  // Arrow position classes without color
   const arrowPositionClasses = {
-    top: 'bottom-0 left-1/2 -translate-x-1/2 translate-y-full border-t-gray-800 border-l-transparent border-r-transparent border-b-0',
-    right: 'left-0 top-1/2 -translate-y-1/2 -translate-x-full border-r-gray-800 border-t-transparent border-b-transparent border-l-0',
-    bottom: 'top-0 left-1/2 -translate-x-1/2 -translate-y-full border-b-gray-800 border-l-transparent border-r-transparent border-t-0',
-    left: 'right-0 top-1/2 -translate-y-1/2 translate-x-full border-l-gray-800 border-t-transparent border-b-transparent border-r-0',
+    top: 'bottom-0 left-1/2 -translate-x-1/2 translate-y-full border-l-transparent border-r-transparent border-b-0',
+    right: 'left-0 top-1/2 -translate-y-1/2 -translate-x-full border-t-transparent border-b-transparent border-l-0',
+    bottom: 'top-0 left-1/2 -translate-x-1/2 -translate-y-full border-l-transparent border-r-transparent border-t-0',
+    left: 'right-0 top-1/2 -translate-y-1/2 translate-x-full border-t-transparent border-b-transparent border-r-0',
   };
 
-  // Light theme arrow adjustments
-  const arrowThemeClasses = {
-    dark: {
-      top: 'border-t-neutral-800',
-      right: 'border-r-neutral-800',
-      bottom: 'border-b-neutral-800',
-      left: 'border-l-neutral-800',
-    },
-    light: {
-      top: 'border-t-white',
-      right: 'border-r-white',
-      bottom: 'border-b-white',
-      left: 'border-l-white',
-    },
-  };
+  // Color classes for arrow based on theme
+  const arrowColorClass = theme === 'dark' 
+    ? {
+        top: 'border-t-neutral-800',
+        right: 'border-r-neutral-800',
+        bottom: 'border-b-neutral-800',
+        left: 'border-l-neutral-800',
+      }
+    : {
+        top: 'border-t-white',
+        right: 'border-r-white',
+        bottom: 'border-b-white',
+        left: 'border-l-white',
+      };
 
   return (
     <>
@@ -210,10 +209,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
             {/* Arrow */}
             <div 
               className={`absolute w-0 h-0 border-solid border-4
-                ${arrowPositionClasses[position].replace(
-                  theme === 'dark' ? '' : `border-${position}-gray-800`,
-                  arrowThemeClasses[theme][position]
-                )}`}
+                ${arrowPositionClasses[position]}
+                ${arrowColorClass[position]}`}
             />
           </motion.div>
         )}

@@ -13,16 +13,32 @@ function getAuthToken(): string | null {
 
 /**
  * Axios instance for LMS API requests.
- * - Sets base URL from Vite env.
- * - Adds Authorization header if token is present.
- * - Handles 401 errors globally (see logout integration).
+ * Configuration aligned with QueryClient settings:
+ * - 10s timeout (matches query stale time)
+ * - 1 retry (matches QueryClient retry setting)
+ * - Proper error handling for network issues
  *
  * @see https://axios-http.com/docs/instance
  */
 export const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   headers: { 'Content-Type': 'application/json' },
-  timeout: 10000,
+  timeout: 10000, // 10 seconds
+  // Axios will retry once, matching QueryClient retry: 1
+  validateStatus: (status) => status < 500, // Don't retry 4xx errors
+});
+
+// Add retry interceptor to match QueryClient configuration
+apiClient.interceptors.response.use(undefined, async (err) => {
+  const config = err.config;
+  
+  // Only retry once, matching QueryClient retry: 1
+  if (!config || !config.retry) {
+    config.retry = 1;
+    return apiClient(config);
+  }
+  
+  return Promise.reject(err);
 });
 
 apiClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
@@ -60,7 +76,7 @@ export const setupAuthErrorHandler = (logoutFn: () => Promise<void>): void => {
           });
       }
       
-      // Network errors
+      // Network errors - will be retried once by the retry interceptor
       if (error.code === 'ECONNABORTED' || error.message === 'Network Error') {
         console.error('Network error:', error.message);
       }

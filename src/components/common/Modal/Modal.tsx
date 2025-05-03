@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { Button } from '../Button';
+import { Button } from '../Button/Button';
 import { createPortal } from 'react-dom';
 
 export interface ModalProps {
