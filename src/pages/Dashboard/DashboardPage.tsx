@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import styles from './DashboardPage.module.css';
 
@@ -6,14 +6,7 @@ import styles from './DashboardPage.module.css';
 import { EnrolledCoursesWidget } from '../../components/features/Dashboard/EnrolledCoursesWidget';
 import { UpcomingDeadlinesWidget } from '../../components/features/Dashboard/UpcomingDeadlinesWidget';
 import { RecentActivityWidget } from '../../components/features/Dashboard/RecentActivityWidget';
-
-// Placeholder widgets - these would be implemented as separate components
-const ProgressSummaryWidget: React.FC = () => (
-  <div className={`bg-white rounded-lg shadow-md p-6 h-full ${styles.dashboardWidget}`}>
-    <h3 className="text-lg font-heading font-semibold text-neutral-800 mb-4">Progress Summary</h3>
-    <p className="text-neutral-600">Your course progress statistics will appear here</p>
-  </div>
-);
+import { EngagementChart } from '../../components/features/Dashboard/EngagementChart';
 
 const fadeIn = {
   hidden: { opacity: 0 },
@@ -26,6 +19,8 @@ const fadeIn = {
 };
 
 const DashboardPage: React.FC = () => {
+  const [timeRange, setTimeRange] = useState<'7days' | '30days' | '90days'>('30days');
+  
   return (
     <div className="min-h-screen bg-neutral-50 py-8">
       <div className="container mx-auto px-4">
@@ -53,10 +48,53 @@ const DashboardPage: React.FC = () => {
             <div className={`${styles.fadeInUp} ${styles.delayOne}`}>
               <UpcomingDeadlinesWidget />
             </div>
-            <div className={`${styles.fadeInUp} ${styles.delayTwo}`}>
-              <ProgressSummaryWidget />
+            
+            {/* Engagement Analytics Chart with time range filter */}
+            <div className={`lg:col-span-3 ${styles.fadeInUp} ${styles.delayTwo}`}>
+              <div className="bg-white rounded-lg shadow-md p-6">
+                <div className="flex flex-wrap items-center justify-between mb-4">
+                  <h2 className="text-xl font-heading font-semibold text-neutral-800">Engagement Analytics</h2>
+                  <div className="flex space-x-2 mt-2 sm:mt-0">
+                    <button
+                      onClick={() => setTimeRange('7days')}
+                      className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                        timeRange === '7days' 
+                          ? 'bg-primary-500 text-white' 
+                          : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                      }`}
+                    >
+                      7 Days
+                    </button>
+                    <button
+                      onClick={() => setTimeRange('30days')}
+                      className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                        timeRange === '30days' 
+                          ? 'bg-primary-500 text-white' 
+                          : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                      }`}
+                    >
+                      30 Days
+                    </button>
+                    <button
+                      onClick={() => setTimeRange('90days')}
+                      className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                        timeRange === '90days' 
+                          ? 'bg-primary-500 text-white' 
+                          : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                      }`}
+                    >
+                      90 Days
+                    </button>
+                  </div>
+                </div>
+                <EngagementChart 
+                  period={timeRange === '7days' ? 'daily' : timeRange === '30days' ? 'daily' : 'weekly'} 
+                  dateRange={timeRange}
+                />
+              </div>
             </div>
-            <div className={`lg:col-span-2 ${styles.fadeInUp} ${styles.delayThree}`}>
+            
+            <div className={`lg:col-span-3 ${styles.fadeInUp} ${styles.delayThree}`}>
               <RecentActivityWidget />
             </div>
           </div>
