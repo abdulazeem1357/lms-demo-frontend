@@ -26,6 +26,7 @@ interface AuthContextType {
   login: (credentials: ILoginRequest) => Promise<void>;
   register: (userData: IRegisterRequest) => Promise<void>;
   logout: () => Promise<void>;
+  devLogin: () => Promise<void>; // Added development login without credentials
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -41,6 +42,19 @@ export function setAuthToken(token: string | null): void {
     localStorage.removeItem('authToken');
   }
 }
+
+// Mock dummy user for development
+const DUMMY_USER: IUser = {
+  id: 'dev-user-id',
+  username: 'dev_user',
+  email: 'dev@example.com',
+  firstName: 'Dev',
+  lastName: 'User',
+  role: 'Student',
+  isActive: true,
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString()
+};
 
 // Mock auth service functions - replace with real API calls
 const login = async (credentials: ILoginRequest): Promise<IAuthResponse> => {
@@ -98,6 +112,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   /**
+   * Development-only login that bypasses API calls
+   * Sets a dummy user and token for testing purposes
+   */
+  const handleDevLogin = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Set dummy token and user
+      const dummyToken = 'dev-token-' + Math.random().toString(36).substring(2);
+      setAuthToken(dummyToken);
+      setUser(DUMMY_USER);
+      navigate('/dashboard');
+    } catch (err) {
+      setError('Development login failed');
+      console.error('Dev login error:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [navigate]);
+
+  /**
    * Authenticate user with credentials
    */
   const handleLogin = useCallback(async (credentials: ILoginRequest) => {
@@ -144,7 +183,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
    */
   const handleLogout = useCallback(async () => {
     try {
-      await logout();
+      // For dev mode, just clear local state without API call
+      const isDevelopment = true; // Set this based on environment if needed
+      
+      if (!isDevelopment) {
+        await logout();
+      }
     } catch (err) {
       console.error('Logout error:', err);
     } finally {
@@ -162,6 +206,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     login: handleLogin,
     register: handleRegister,
     logout: handleLogout,
+    devLogin: handleDevLogin, // Expose the development login function
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -133,9 +133,9 @@ export const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
 
   // Theme-based background colors
   const themeClasses = {
-    light: 'bg-gray-200',
-    dark: 'bg-gray-700',
-    avocado: 'bg-avocado-200',
+    light: 'bg-neutral-200',
+    dark: 'bg-neutral-700',
+    avocado: 'bg-primary-200',
   };
 
   // Animation class

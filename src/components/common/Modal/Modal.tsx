@@ -258,7 +258,7 @@ export const Modal: React.FC<ModalProps> = ({
           {showCloseButton && (
             <button
               type="button"
-              className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-avocado-500 rounded p-1"
+              className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded p-1"
               onClick={onClose}
               aria-label="Close modal"
               data-testid="modal-close-button"
@@ -271,7 +271,7 @@ export const Modal: React.FC<ModalProps> = ({
         {/* Modal body */}
         <div 
           id={contentId}
-          className="px-6 py-4 flex-1 overflow-y-auto text-gray-800 dark:text-gray-200"
+          className="px-6 py-4 flex-1 overflow-y-auto text-neutral-800"
           data-testid="modal-body"
         >
           {children}
@@ -280,7 +280,7 @@ export const Modal: React.FC<ModalProps> = ({
         {/* Modal footer (optional) */}
         {footer && (
           <div 
-            className="px-6 py-4 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 rounded-b-lg flex justify-end space-x-3"
+            className="px-6 py-4 bg-neutral-50 border-t border-neutral-200 rounded-b-lg flex justify-end space-x-3"
             data-testid="modal-footer"
           >
             {footer}

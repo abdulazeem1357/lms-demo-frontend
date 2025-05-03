@@ -77,20 +77,20 @@ export const Badge: React.FC<BadgeProps> = ({
   // Variant color maps
   const variantClasses = {
     filled: {
-      primary: 'bg-avocado-500 text-white',
-      secondary: 'bg-gray-500 text-white',
-      success: 'bg-green-500 text-white',
-      warning: 'bg-yellow-500 text-white',
-      error: 'bg-red-500 text-white',
-      info: 'bg-blue-500 text-white',
+      primary: 'bg-primary-500 text-white',
+      secondary: 'bg-secondary-500 text-white',
+      success: 'bg-success text-white',
+      warning: 'bg-warning text-white',
+      error: 'bg-error text-white',
+      info: 'bg-info text-white',
     },
     outlined: {
-      primary: 'bg-avocado-50 text-avocado-700 border border-avocado-500',
-      secondary: 'bg-gray-50 text-gray-700 border border-gray-500',
-      success: 'bg-green-50 text-green-700 border border-green-500',
-      warning: 'bg-yellow-50 text-yellow-700 border border-yellow-500',
-      error: 'bg-red-50 text-red-700 border border-red-500',
-      info: 'bg-blue-50 text-blue-700 border border-blue-500',
+      primary: 'bg-primary-50 text-primary-700 border border-primary-500',
+      secondary: 'bg-secondary-50 text-secondary-700 border border-secondary-500',
+      success: 'bg-success-50 text-success border border-success',
+      warning: 'bg-warning-50 text-warning border border-warning',
+      error: 'bg-error-50 text-error border border-error',
+      info: 'bg-info-50 text-info border border-info',
     },
   };
   

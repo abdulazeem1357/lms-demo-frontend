@@ -68,21 +68,21 @@ export const Card: React.FC<CardProps> = ({
   // Border styles
   const borderStyles = {
     none: '',
-    thin: 'border border-gray-200',
-    subtle: 'border border-gray-100',
+    thin: 'border border-neutral-300',
+    subtle: 'border border-neutral-200',
   };
   
   // Elevation/shadow styles
   const elevationStyles = {
     none: '',
     low: 'shadow-sm',
-    medium: 'shadow',
-    high: 'shadow-md',
+    medium: 'shadow-md',
+    high: 'shadow-lg',
   };
   
   // Base card styles
   const cardStyles = `
-    bg-white 
+    bg-neutral-50 
     rounded-lg 
     overflow-hidden
     ${borderStyles[border]}

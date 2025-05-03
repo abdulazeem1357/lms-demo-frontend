@@ -9,7 +9,7 @@ interface SpinnerProps {
   
   /**
    * Color of the spinner - uses Tailwind color classes
-   * @default 'border-avocado-500'
+   * @default 'border-primary-500'
    */
   color?: string;
   
@@ -32,7 +32,7 @@ interface SpinnerProps {
  */
 export const Spinner: React.FC<SpinnerProps> = ({
   size = 24,
-  color = 'border-avocado-500',
+  color = 'border-primary-500',
   className = '',
 }) => {
   return (

@@ -71,8 +71,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
 
   // Theme classes
   const themeClasses = {
-    dark: 'bg-gray-800 text-white',
-    light: 'bg-white text-gray-800 border border-gray-200',
+    dark: 'bg-neutral-800 text-white',
+    light: 'bg-white text-neutral-800 border border-neutral-300',
   };
 
   // Position calculation based on trigger element dimensions
@@ -160,10 +160,10 @@ export const Tooltip: React.FC<TooltipProps> = ({
   // Light theme arrow adjustments
   const arrowThemeClasses = {
     dark: {
-      top: 'border-t-gray-800',
-      right: 'border-r-gray-800',
-      bottom: 'border-b-gray-800',
-      left: 'border-l-gray-800',
+      top: 'border-t-neutral-800',
+      right: 'border-r-neutral-800',
+      bottom: 'border-b-neutral-800',
+      left: 'border-l-neutral-800',
     },
     light: {
       top: 'border-t-white',

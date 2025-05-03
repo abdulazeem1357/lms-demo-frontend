@@ -5,18 +5,13 @@ import { setupAuthErrorHandler } from './api/client'
 import { AnimatePresence } from 'framer-motion'
 import { PageTransition } from './components/common/PageTransition'
 
-// Import your actual pages here
-// import DashboardPage from './pages/DashboardPage'
-// import CoursesPage from './pages/CoursesPage'
-// import ProfilePage from './pages/ProfilePage'
-// import LoginPage from './pages/LoginPage'
-// import RegisterPage from './pages/RegisterPage'
+// Import actual pages
+import { LoginPage } from './pages/Login'
+import { DashboardPage } from './pages/Dashboard'
 
 // Temporarily using placeholder components for the demo
-const DashboardPage = () => <div className="p-8">Dashboard Page</div>
 const CoursesPage = () => <div className="p-8">Courses Page</div>
 const ProfilePage = () => <div className="p-8">Profile Page</div>
-const LoginPage = () => <div className="p-8">Login Page</div>
 const RegisterPage = () => <div className="p-8">Register Page</div>
 
 /**

@@ -34,7 +34,7 @@ export interface AvatarProps {
   
   /**
    * Background color class when showing initials (Tailwind class)
-   * @default 'bg-avocado-500'
+   * @default 'bg-primary-500'
    */
   bgColor?: string;
   
@@ -76,7 +76,7 @@ export interface AvatarProps {
  * 
  * @example
  * // Avatar with initials
- * <Avatar initials="JD" size="lg" bgColor="bg-blue-500" />
+ * <Avatar initials="JD" size="lg" bgColor="bg-primary-500" />
  * 
  * @example
  * // Avatar with online status
@@ -88,7 +88,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   initials,
   size = 'md',
   shape = 'circle',
-  bgColor = 'bg-avocado-500',
+  bgColor = 'bg-primary-500',
   textColor = 'text-white',
   bordered = false,
   status = 'none',
@@ -117,10 +117,10 @@ export const Avatar: React.FC<AvatarProps> = ({
   
   // Status color classes
   const statusColorClasses = {
-    online: 'bg-green-500',
-    away: 'bg-yellow-500',
-    offline: 'bg-gray-400',
-    busy: 'bg-red-500',
+    online: 'bg-success',
+    away: 'bg-warning',
+    offline: 'bg-neutral-400',
+    busy: 'bg-error',
     none: 'hidden',
   };
   

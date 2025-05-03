@@ -126,12 +126,12 @@ export const StateDisplay: React.FC<StateDisplayProps> = ({
   // Variant-specific styles
   const variantStyles = {
     empty: {
-      icon: 'text-gray-400',
-      container: 'bg-gray-50',
+      icon: 'text-neutral-400',
+      container: 'bg-neutral-50',
     },
     error: {
-      icon: 'text-red-500',
-      container: 'bg-red-50',
+      icon: 'text-error',
+      container: 'bg-error-50',
     }
   };
 
@@ -166,7 +166,7 @@ export const StateDisplay: React.FC<StateDisplayProps> = ({
         <Button 
           onClick={action.onClick}
           variant={variant === 'error' ? 'secondary' : 'primary'}
-          size={size === 'compact' ? 'small' : size === 'large' ? 'large' : 'medium'}
+          size={size === 'compact' ? 'sm' : size === 'large' ? 'lg' : 'md'}
         >
           {action.text}
         </Button>
