@@ -5,19 +5,13 @@ import styles from './DashboardPage.module.css';
 // Import widget implementations
 import { EnrolledCoursesWidget } from '../../components/features/Dashboard/EnrolledCoursesWidget';
 import { UpcomingDeadlinesWidget } from '../../components/features/Dashboard/UpcomingDeadlinesWidget';
+import { RecentActivityWidget } from '../../components/features/Dashboard/RecentActivityWidget';
 
 // Placeholder widgets - these would be implemented as separate components
 const ProgressSummaryWidget: React.FC = () => (
   <div className={`bg-white rounded-lg shadow-md p-6 h-full ${styles.dashboardWidget}`}>
     <h3 className="text-lg font-heading font-semibold text-neutral-800 mb-4">Progress Summary</h3>
     <p className="text-neutral-600">Your course progress statistics will appear here</p>
-  </div>
-);
-
-const RecentAnnouncementsWidget: React.FC = () => (
-  <div className={`bg-white rounded-lg shadow-md p-6 h-full ${styles.dashboardWidget}`}>
-    <h3 className="text-lg font-heading font-semibold text-neutral-800 mb-4">Recent Announcements</h3>
-    <p className="text-neutral-600">Latest announcements will appear here</p>
   </div>
 );
 
@@ -63,7 +57,7 @@ const DashboardPage: React.FC = () => {
               <ProgressSummaryWidget />
             </div>
             <div className={`lg:col-span-2 ${styles.fadeInUp} ${styles.delayThree}`}>
-              <RecentAnnouncementsWidget />
+              <RecentActivityWidget />
             </div>
           </div>
 
