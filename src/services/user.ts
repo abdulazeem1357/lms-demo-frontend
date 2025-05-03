@@ -1,8 +1,13 @@
+// user.ts
+// Unified service module that conditionally uses either mock or real implementations
+
 import * as real from './user.service';
 import * as mock from './user.mock.service';
 
+// Determine whether to use mock implementations based on environment variable
 const useMocks = import.meta.env.VITE_USE_MOCKS === 'true';
 
+// Export functions conditionally - use mock if enabled, otherwise use real implementation
 export const getCurrentUserProfile = useMocks ? mock.getCurrentUserProfile : real.getCurrentUserProfile;
 export const updateUserProfile = useMocks ? mock.updateUserProfile : real.updateUserProfile;
 export const changePassword = useMocks ? mock.changePassword : real.changePassword;

@@ -2,10 +2,10 @@ import { Navigate } from 'react-router-dom';
 import { PageTransition } from '../components/common/PageTransition';
 import { LoginPage } from '../pages/Login';
 import { DashboardPage } from '../pages/Dashboard';
+import { ProfileSettingsPage } from '../pages/Profile';
 
 // Temporarily using placeholder components for the demo
 const CoursesPage = () => <div className="p-8">Courses Page</div>;
-const ProfilePage = () => <div className="p-8">Profile Page</div>;
 const RegisterPage = () => <div className="p-8">Register Page</div>;
 
 export const publicRoutes = [
@@ -48,7 +48,7 @@ export const protectedRoutes = [
     path: '/profile',
     element: (
       <PageTransition>
-        <ProfilePage />
+        <ProfileSettingsPage />
       </PageTransition>
     ),
   },
