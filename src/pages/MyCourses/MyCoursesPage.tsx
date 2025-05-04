@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
+import styles from './MyCoursesPage.module.css';
 
 // Services
 import { getUserEnrollments } from '../../services/enrollment';
@@ -34,7 +35,7 @@ const FilterIcon: React.FC<{ className?: string }> = ({ className }) => (
 
 const ChevronDownIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
   </svg>
 );
 
@@ -215,14 +216,14 @@ const MyCoursesPage: React.FC = () => {
       <div className="bg-white rounded-lg shadow-md mb-8">
         <div className="flex flex-col md:flex-row items-center p-4">
           {/* Search input with icon */}
-          <div className="relative w-full md:w-1/2 lg:w-2/3 mb-4 md:mb-0">
+          <div className={`relative w-full md:w-1/2 lg:w-2/3 mb-4 md:mb-0 ${styles.searchInputContainer}`}>
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-neutral-500">
               <SearchIcon />
             </div>
             <input
               type="text"
               placeholder="Search by title or description..."
-              className="w-full pl-10 pr-4 py-2 border border-neutral-300 rounded-md bg-neutral-50 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+              className={`w-full pl-10 pr-4 py-2 border border-neutral-300 rounded-md bg-neutral-50 ${styles.searchInput}`}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -232,7 +233,7 @@ const MyCoursesPage: React.FC = () => {
             {/* Sort Dropdown */}
             <div className="relative" ref={sortDropdownRef}>
               <button 
-                className="w-full sm:w-auto flex items-center justify-between px-4 py-2 border border-neutral-300 rounded-md bg-white hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className={`w-full sm:w-auto flex items-center justify-between px-4 py-2 border border-neutral-300 rounded-md bg-white ${styles.filterButton}`}
                 onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
               >
                 <span className="flex items-center text-sm">
@@ -243,7 +244,7 @@ const MyCoursesPage: React.FC = () => {
               </button>
               
               {isSortDropdownOpen && (
-                <div className="absolute right-0 mt-1 w-56 bg-white rounded-md border border-neutral-200 shadow-lg z-10">
+                <div className={`absolute right-0 mt-1 w-56 bg-white rounded-md border border-neutral-200 shadow-lg z-10 ${styles.sortDropdown}`}>
                   <ul className="py-1">
                     {SORT_OPTIONS.map((option) => (
                       <li key={option.value}>
@@ -273,7 +274,7 @@ const MyCoursesPage: React.FC = () => {
             {/* Filter Dropdown */}
             <div className="relative" ref={filterDropdownRef}>
               <button 
-                className="w-full sm:w-auto flex items-center justify-between px-4 py-2 border border-neutral-300 rounded-md bg-white hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className={`w-full sm:w-auto flex items-center justify-between px-4 py-2 border border-neutral-300 rounded-md bg-white ${styles.filterButton} ${filterStatus !== 'all' ? styles.filterButtonActive : ''}`}
                 onClick={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)}
               >
                 <span className="flex items-center text-sm">
@@ -284,7 +285,7 @@ const MyCoursesPage: React.FC = () => {
               </button>
               
               {isFilterDropdownOpen && (
-                <div className="absolute right-0 mt-1 w-56 bg-white rounded-md border border-neutral-200 shadow-lg z-10">
+                <div className={`absolute right-0 mt-1 w-56 bg-white rounded-md border border-neutral-200 shadow-lg z-10 ${styles.sortDropdown}`}>
                   <ul className="py-1">
                     {FILTER_OPTIONS.map((option) => (
                       <li key={option.value}>
@@ -318,27 +319,27 @@ const MyCoursesPage: React.FC = () => {
           <div className="px-4 py-3 bg-neutral-50 border-t border-neutral-200 rounded-b-lg flex flex-wrap items-center">
             <span className="text-sm text-neutral-600 mr-2">Active filters:</span>
             {searchQuery && (
-              <span className="inline-flex items-center m-1 px-3 py-1 bg-primary-100 text-primary-800 text-sm font-medium rounded-full">
+              <span className={`inline-flex items-center m-1 ${styles.filterPill} ${styles.searchFilterPill}`}>
                 "{searchQuery}"
                 <button 
-                  className="ml-1 text-primary-600 hover:text-primary-800 focus:outline-none"
+                  className={`${styles.filterPillCloseBtn}`}
                   onClick={() => setSearchQuery('')}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 101.414 1.414L10 11.414l1.293 1.293a1 1 001.414-1.414L11.414 10l1.293-1.293a1 1 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                   </svg>
                 </button>
               </span>
             )}
             {filterStatus !== 'all' && (
-              <span className="inline-flex items-center m-1 px-3 py-1 bg-secondary-100 text-secondary-800 text-sm font-medium rounded-full">
+              <span className={`inline-flex items-center m-1 ${styles.filterPill} ${styles.statusFilterPill}`}>
                 {filterStatus === 'completed' ? 'Completed' : 'In Progress'}
                 <button 
-                  className="ml-1 text-secondary-600 hover:text-secondary-800 focus:outline-none"
+                  className={`${styles.filterPillCloseBtn}`}
                   onClick={() => setFilterStatus('all')}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 101.414 1.414L10 11.414l1.293 1.293a1 1 001.414-1.414L11.414 10l1.293-1.293a1 1 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                   </svg>
                 </button>
               </span>
@@ -386,7 +387,7 @@ const MyCoursesPage: React.FC = () => {
       
       {/* Empty state */}
       {!isLoading && !isError && filteredCourses.length === 0 && (
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className={styles.emptyStateContainer}>
           {searchQuery || filterStatus !== 'all' ? (
             <StateDisplay
               type="empty"
@@ -459,7 +460,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ enrollment, progress }) => {
   const statusClass = progress?.completionStatus === 'completed' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800';
   
   return (
-    <Card hoverable className="flex flex-col h-full overflow-hidden">
+    <Card hoverable className={`flex flex-col h-full overflow-hidden ${styles.courseCard}`}>
       <Link to={`/courses/${course.id}`} className="block h-full">
         {/* Course thumbnail */}
         <div className="h-40 bg-neutral-200 relative overflow-hidden">
@@ -486,12 +487,14 @@ const CourseCard: React.FC<CourseCardProps> = ({ enrollment, progress }) => {
               <span className="text-sm font-medium text-neutral-900">{completionPercentage}%</span>
             </div>
             
-            <ProgressBar 
-              value={completionPercentage} 
-              className="mb-3"
-            />
+            <div className={styles.progressContainer}>
+              <div 
+                className={`${styles.progressValue} ${progress?.completionStatus === 'completed' ? styles.progressValueCompleted : styles.progressValueInProgress}`}
+                style={{ width: `${completionPercentage}%` }}
+              ></div>
+            </div>
             
-            <p className="text-xs text-neutral-500">Enrolled on {enrollmentDate}</p>
+            <p className="text-xs text-neutral-500 mt-3">Enrolled on {enrollmentDate}</p>
           </div>
         </div>
       </Link>

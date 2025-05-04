@@ -1,0 +1,189 @@
+/* 
+  MyCoursesPage.module.css
+  Custom styles for the My Courses page that complement Tailwind CSS utilities
+*/
+
+/* Course card hover effect with subtle scaling and shadow transition */
+.courseCard {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.courseCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* Filter button hover and active states */
+.filterButton {
+  transition: all 0.2s ease;
+}
+
+.filterButton:hover {
+  background-color: var(--color-neutral-100);
+}
+
+.filterButtonActive {
+  background-color: var(--color-primary-50) !important;
+  color: var(--color-primary-700) !important;
+  border-color: var(--color-primary-300) !important;
+}
+
+/* Custom sort dropdown menu animation */
+.sortDropdown {
+  transform-origin: top right;
+  animation: dropdownAppear 0.2s ease forwards;
+}
+
+@keyframes dropdownAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Custom filter pill with close button */
+.filterPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.searchFilterPill {
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-800);
+}
+
+.statusFilterPill {
+  background-color: var(--color-secondary-100);
+  color: var(--color-secondary-800);
+}
+
+.filterPillCloseBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.375rem;
+  border-radius: 9999px;
+  transition: all 0.15s ease;
+}
+
+.searchFilterPill .filterPillCloseBtn:hover {
+  background-color: var(--color-primary-200);
+  color: var(--color-primary-900);
+}
+
+.statusFilterPill .filterPillCloseBtn:hover {
+  background-color: var(--color-secondary-200);
+  color: var(--color-secondary-900);
+}
+
+/* Course card progress indicator custom styling */
+.progressContainer {
+  position: relative;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--color-neutral-200);
+  overflow: hidden;
+}
+
+.progressValue {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  transition: width 0.6s ease;
+  border-radius: 9999px;
+}
+
+.progressValueInProgress {
+  background-color: var(--color-primary-500);
+}
+
+.progressValueCompleted {
+  background-color: var(--color-success);
+}
+
+/* Empty state styling */
+.emptyStateContainer {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.emptyStateIcon {
+  margin: 0 auto 1.5rem;
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-neutral-400);
+}
+
+/* Search input focus effect */
+.searchInputContainer {
+  position: relative;
+}
+
+.searchInput {
+  transition: all 0.2s ease;
+  border: 1px solid var(--color-neutral-300);
+}
+
+.searchInput:focus {
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+}
+
+/* CSS Variables to use theme values from tailwind.config.ts */
+:root {
+  /* These variables are already defined in index.css,
+     but we're repeating them here for clarity and to ensure VSCode
+     provides proper autocomplete for this module file */
+  --color-primary-50: #fff7ed;
+  --color-primary-100: #ffedd5;
+  --color-primary-200: #fed7aa;
+  --color-primary-300: #fdba74;
+  --color-primary-400: #fb923c;
+  --color-primary-500: #f97316;
+  --color-primary-600: #ea580c;
+  --color-primary-700: #c2410c;
+  --color-primary-800: #9a3412;
+  --color-primary-900: #7c2d12;
+  --color-primary-950: #431407;
+  
+  --color-secondary-50: #f0fdfa;
+  --color-secondary-100: #ccfbf1;
+  --color-secondary-200: #99f6e4;
+  --color-secondary-300: #5eead4;
+  --color-secondary-400: #2dd4bf;
+  --color-secondary-500: #14b8a6;
+  --color-secondary-600: #0d9488;
+  --color-secondary-700: #0f766e;
+  --color-secondary-800: #115e59;
+  --color-secondary-900: #134e4a;
+  --color-secondary-950: #042f2e;
+
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+  
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+}
