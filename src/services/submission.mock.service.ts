@@ -47,6 +47,32 @@ export async function gradeAssignmentSubmission(
 }
 
 /**
+ * Mock implementation for submitting an assignment with a file
+ */
+export async function submitAssignment(assignmentId: string, file: File, comments?: string): Promise<IAssignmentSubmission> {
+  // Simulate a delay to mimic network request
+  await new Promise(resolve => setTimeout(resolve, 1500));
+  
+  // Create a mock submission
+  const mockSubmission: IAssignmentSubmission = {
+    submissionId: `submission-${Date.now()}`,
+    userId: 'current-user-id',
+    submittedAt: new Date().toISOString(),
+    fileUrl: URL.createObjectURL(file)
+  };
+
+  console.log('Mock assignment submission:', { 
+    assignmentId, 
+    fileName: file.name, 
+    fileSize: file.size,
+    comments,
+    submission: mockSubmission
+  });
+  
+  return Promise.resolve(mockSubmission);
+}
+
+/**
  * Mock implementation for getting quiz submissions
  */
 export async function getQuizSubmissions(quizId: string): Promise<IQuizSubmission[]> {

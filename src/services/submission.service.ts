@@ -41,6 +41,29 @@ export async function gradeAssignmentSubmission(submissionId: string, payload: I
 }
 
 /**
+ * Submits an assignment with a file and optional comments.
+ */
+export async function submitAssignment(assignmentId: string, file: File, comments?: string): Promise<IAssignmentSubmission> {
+  const formData = new FormData();
+  formData.append('file', file);
+  if (comments) {
+    formData.append('comments', comments);
+  }
+
+  const { data } = await apiClient.post<{ data: IAssignmentSubmission }>(
+    `/assignments/${assignmentId}/submit`,
+    formData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+  );
+  
+  return data.data;
+}
+
+/**
  * Fetches all submissions for a specific quiz.
  */
 export async function getQuizSubmissions(quizId: string): Promise<IQuizSubmission[]> {

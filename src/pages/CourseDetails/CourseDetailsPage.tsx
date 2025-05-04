@@ -16,6 +16,7 @@ import { getCourseLiveLectures, getModuleLectures } from '../../services/lecture
 import { getUserEnrollments, enrollUserInCourse } from '../../services/enrollment';
 // Use mock quizzes for local development and UI testing
 import { getModuleQuizzes } from '../../services/assessment.mock.service';
+import { getModuleAssignments } from '../../services/assessment';
 
 // Context
 import { useAuth } from '../../contexts/AuthContext';
@@ -135,6 +136,15 @@ const CourseDetailsPage: React.FC = () => {
     queries: (modules || []).map((module) => ({
       queryKey: ['moduleQuizzes', module.id],
       queryFn: () => getModuleQuizzes(module.id),
+      enabled: !!module.id,
+    })),
+  });
+
+  // Fetch assignments for each module using useQueries
+  const assignmentsQueries = useQueries({
+    queries: (modules || []).map((module) => ({
+      queryKey: ['moduleAssignments', module.id],
+      queryFn: () => getModuleAssignments(module.id),
       enabled: !!module.id,
     })),
   });
@@ -426,19 +436,73 @@ const CourseDetailsPage: React.FC = () => {
                   )}
                 </div>
               </Card>
-            </div>
 
-            {/* Sidebar column */}
-            <div className="space-y-6">
+              {/* Assignments card (below Quizzes) */}
+              <Card className="mb-6">
+                <div className="p-6 border-b border-neutral-200">
+                  <h2 className="text-xl font-heading font-semibold text-neutral-800 flex items-center">
+                    <DocumentTextIcon className="w-5 h-5 mr-2 text-primary-500" />
+                    Assignments
+                  </h2>
+                </div>
+                <div className="p-4">
+                  {modules && modules.length > 0 ? (
+                    modules.map((module, idx) => {
+                      const assignmentsData = assignmentsQueries[idx]?.data;
+                      const isLoading = assignmentsQueries[idx]?.isLoading;
+                      return (
+                        <div key={module.id} className="mb-4">
+                          <h3 className="font-medium text-neutral-700 mb-2 text-sm">
+                            {module.title}
+                          </h3>
+                          {isLoading ? (
+                            <div className="py-2 flex justify-center">
+                              <Spinner size="sm" label="Loading assignments..." />
+                            </div>
+                          ) : assignmentsData && assignmentsData.length > 0 ? (
+                            <ul className="space-y-3">
+                              {assignmentsData.map((assignment: any) => (
+                                <li key={assignment.id} className="bg-neutral-50 border border-neutral-200 rounded-lg p-3 flex flex-col gap-2">
+                                  <div>
+                                    <span className="font-semibold text-neutral-900">{assignment.title}</span>
+                                    {assignment.description && (
+                                      <p className="text-neutral-600 text-xs mt-1 line-clamp-2">{assignment.description}</p>
+                                    )}
+                                  </div>
+                                  <Link
+                                    to={`/assignment/${assignment.id}`}
+                                    className="inline-flex items-center px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors text-sm font-medium w-max"
+                                  >
+                                    View / Submit Assignment
+                                    <ChevronRightIcon className="w-4 h-4 ml-2" />
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <div className="text-neutral-400 text-xs italic">No assignments for this module.</div>
+                          )}
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="text-center text-neutral-500 py-4">
+                      No assignments available for this course yet.
+                    </div>
+                  )}
+                </div>
+              </Card>
+            </div>
+            {/* Sidebar column for live lectures and materials */}
+            <div className="lg:col-span-1 flex flex-col gap-6">
               {/* Live lectures card */}
-              <Card>
+              <Card className="mb-6">
                 <div className="p-6 border-b border-neutral-200">
                   <h2 className="text-lg font-heading font-semibold text-neutral-800 flex items-center">
                     <VideoCameraIcon className="w-5 h-5 mr-2 text-primary-500" />
-                    Upcoming Live Lectures
+                    Live Lectures
                   </h2>
                 </div>
-                
                 <div className="p-4">
                   {liveLectures && liveLectures.length > 0 ? (
                     <ul className="divide-y divide-neutral-100">
@@ -473,7 +537,6 @@ const CourseDetailsPage: React.FC = () => {
                   )}
                 </div>
               </Card>
-              
               {/* Course materials card */}
               <Card>
                 <div className="p-6 border-b border-neutral-200">
@@ -482,7 +545,6 @@ const CourseDetailsPage: React.FC = () => {
                     Course Materials
                   </h2>
                 </div>
-                
                 <div className="p-4">
                   {materials && materials.length > 0 ? (
                     <ul className="divide-y divide-neutral-100">
