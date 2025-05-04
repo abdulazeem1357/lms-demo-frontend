@@ -12,7 +12,7 @@ import { PageTransition } from '../../components/common/PageTransition';
 
 // Services
 import { getCourseById, getCourseModules, getCourseMaterials } from '../../services/course';
-import { getCourseLiveLectures } from '../../services/lecture';
+import { getCourseLiveLectures, getModuleLectures } from '../../services/lecture';
 import { getUserEnrollments, enrollUserInCourse } from '../../services/enrollment';
 
 // Context
@@ -28,6 +28,8 @@ import {
   CheckBadgeIcon,
   ChevronRightIcon,
   ChevronDownIcon,
+  PlayCircleIcon,
+  AcademicCapIcon,
 } from '@heroicons/react/24/outline';
 
 /**
@@ -39,13 +41,32 @@ const CourseDetailsPage: React.FC = () => {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const [expandedModules, setExpandedModules] = React.useState<Record<string, boolean>>({});
+  const [moduleLectures, setModuleLectures] = React.useState<Record<string, any[]>>({});
   
-  // Handle module expansion toggle
+  // Handle module expansion toggle with lecture fetching
   const toggleModule = (moduleId: string) => {
-    setExpandedModules(prev => ({
-      ...prev,
-      [moduleId]: !prev[moduleId]
-    }));
+    setExpandedModules(prev => {
+      const isExpanding = !prev[moduleId];
+      
+      // If we're expanding and don't have lectures yet, fetch them
+      if (isExpanding && !moduleLectures[moduleId]) {
+        getModuleLectures(moduleId)
+          .then(lectures => {
+            setModuleLectures(prev => ({
+              ...prev,
+              [moduleId]: lectures
+            }));
+          })
+          .catch(error => {
+            console.error(`Failed to fetch lectures for module ${moduleId}:`, error);
+          });
+      }
+      
+      return {
+        ...prev,
+        [moduleId]: isExpanding
+      };
+    });
   };
 
   // Fetch course details
@@ -285,16 +306,49 @@ const CourseDetailsPage: React.FC = () => {
                             />
                           </button>
                           
-                          {expandedModules[module.id] && module.chapters && (
-                            <ul className="pl-8 pr-4 pb-3 border-t border-neutral-100">
-                              {module.chapters.map((chapter) => (
-                                <li key={chapter.id} className="py-2 border-b border-neutral-50 last:border-b-0">
-                                  <div className="text-neutral-700">
-                                    {chapter.title}
-                                  </div>
-                                </li>
-                              ))}
-                            </ul>
+                          {expandedModules[module.id] && (
+                            <div className="pl-8 pr-4 pb-3 border-t border-neutral-100">
+                              {/* Show module lectures */}
+                              {moduleLectures[module.id] ? (
+                                <ul className="divide-y divide-neutral-50">
+                                  {moduleLectures[module.id].map((lecture) => (
+                                    <li key={lecture.id} className="py-3">
+                                      <Link 
+                                        to={`/lecture/${lecture.id}`}
+                                        className="flex items-center text-neutral-700 hover:text-primary-600 group"
+                                      >
+                                        <PlayCircleIcon className="w-5 h-5 mr-2 text-neutral-400 group-hover:text-primary-500" />
+                                        <span>{lecture.title}</span>
+                                        <span className="ml-auto text-xs text-neutral-500">
+                                          {Math.floor(lecture.duration / 60)}:{String(lecture.duration % 60).padStart(2, '0')} min
+                                        </span>
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : (
+                                // Show chapters if lectures aren't available yet
+                                <ul className="divide-y divide-neutral-50">
+                                  {module.chapters?.map((chapter) => (
+                                    <li key={chapter.id} className="py-3">
+                                      <Link 
+                                        to={`/lecture/${chapter.id}`}
+                                        className="flex items-center text-neutral-700 hover:text-primary-600 group"
+                                      >
+                                        <AcademicCapIcon className="w-5 h-5 mr-2 text-neutral-400 group-hover:text-primary-500" />
+                                        <span>{chapter.title}</span>
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                              
+                              {expandedModules[module.id] && !moduleLectures[module.id] && (
+                                <div className="py-2 flex justify-center">
+                                  <Spinner size="sm" label="Loading lectures..." />
+                                </div>
+                              )}
+                            </div>
                           )}
                         </li>
                       ))}
