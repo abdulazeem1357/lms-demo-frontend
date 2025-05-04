@@ -29,5 +29,42 @@
       "title": "Quiz 1: TypeScript Fundamentals",
       "createdAt": "2025-03-01T11:00:00Z",
       "updatedAt": "2025-03-01T11:00:00Z"
+    },
+    {
+      "id": "quiz-demo-1",
+      "moduleId": "m1r1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
+      "title": "Demo Quiz: React Fundamentals",
+      "description": "A sample quiz for testing the QuizPage UI.",
+      "createdAt": "2025-05-04T10:00:00Z",
+      "updatedAt": "2025-05-04T10:00:00Z",
+      "timeLimit": 180,
+      "questions": [
+        {
+          "id": "q1",
+          "quizId": "quiz-demo-1",
+          "type": "single_choice",
+          "text": "What does JSX stand for?",
+          "options": [
+            { "id": "a", "text": "JavaScript XML" },
+            { "id": "b", "text": "Java Syntax Extension" },
+            { "id": "c", "text": "JavaScript Xtreme" }
+          ],
+          "order": 1
+        },
+        {
+          "id": "q2",
+          "quizId": "quiz-demo-1",
+          "type": "true_false",
+          "text": "React is maintained by Facebook.",
+          "order": 2
+        },
+        {
+          "id": "q3",
+          "quizId": "quiz-demo-1",
+          "type": "short_answer",
+          "text": "Name a React hook.",
+          "order": 3
+        }
+      ]
     }
   ]

@@ -92,8 +92,9 @@ export async function getModuleQuizzes(moduleId: string): Promise<IQuiz[]> {
   return Promise.resolve((quizzes as IQuiz[]).filter(q => q.moduleId === moduleId));
 }
 
-export async function getQuizById(quizId: string): Promise<IQuiz> {
-  const quiz = findQuizById(quizId);
+export async function getQuizById(quizId: string): Promise<any> {
+  // Return the full quiz object, including questions and timeLimit if present
+  const quiz = (quizzes as any[]).find(q => q.id === quizId);
   if (!quiz) throw new Error('Quiz not found');
   return Promise.resolve(quiz);
 }

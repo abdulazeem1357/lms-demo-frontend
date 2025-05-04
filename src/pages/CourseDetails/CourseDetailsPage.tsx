@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient, useQueries } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 
@@ -130,13 +130,14 @@ const CourseDetailsPage: React.FC = () => {
     enabled: !!user?.id,
   });
 
-  // Fetch quizzes for each module using useQueries
-  const quizzesQueries = (modules || []).map((module) => ({
-    queryKey: ['moduleQuizzes', module.id],
-    queryFn: () => getModuleQuizzes(module.id),
-    enabled: !!module.id,
-  }));
-  const quizzesResults = useQueryClient().getQueriesData({ predicate: (q) => q.queryKey[0] === 'moduleQuizzes' });
+  // Fetch quizzes for each module using useQueries (ensures queries are triggered)
+  const quizzesQueries = useQueries({
+    queries: (modules || []).map((module) => ({
+      queryKey: ['moduleQuizzes', module.id],
+      queryFn: () => getModuleQuizzes(module.id),
+      enabled: !!module.id,
+    })),
+  });
 
   // Check if user is enrolled in this course
   const isEnrolled = React.useMemo(() => {
@@ -380,17 +381,21 @@ const CourseDetailsPage: React.FC = () => {
                 </div>
                 <div className="p-4">
                   {modules && modules.length > 0 ? (
-                    modules.map((module) => {
-                      // Find quizzes for this module from React Query cache
-                      const quizzesData = quizzesResults.find(([key]) => Array.isArray(key) && key[1] === module.id)?.[1] as any[] | undefined;
+                    modules.map((module, idx) => {
+                      const quizzesData = quizzesQueries[idx]?.data;
+                      const isLoading = quizzesQueries[idx]?.isLoading;
                       return (
                         <div key={module.id} className="mb-4">
                           <h3 className="font-medium text-neutral-700 mb-2 text-sm">
                             {module.title}
                           </h3>
-                          {quizzesData && quizzesData.length > 0 ? (
+                          {isLoading ? (
+                            <div className="py-2 flex justify-center">
+                              <Spinner size="sm" label="Loading quizzes..." />
+                            </div>
+                          ) : quizzesData && quizzesData.length > 0 ? (
                             <ul className="space-y-3">
-                              {quizzesData.map((quiz) => (
+                              {quizzesData.map((quiz: any) => (
                                 <li key={quiz.id} className="bg-neutral-50 border border-neutral-200 rounded-lg p-3 flex flex-col gap-2">
                                   <div>
                                     <span className="font-semibold text-neutral-900">{quiz.title}</span>
