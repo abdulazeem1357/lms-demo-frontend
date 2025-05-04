@@ -268,17 +268,35 @@ const CourseDetailsPage: React.FC = () => {
                 <h2 className="text-xl font-heading font-semibold mb-4 text-neutral-800">Course Overview</h2>
                 <p className="text-neutral-700">{course.description}</p>
                 
-                {/* Enrollment button - conditionally rendered based on enrollment status */}
-                <div className="mt-6">
-                  {isEnrolled ? (
-                    <Link 
-                      to={`/courses/${courseId}/lectures`}
-                      className="inline-flex items-center justify-center px-6 py-3 bg-secondary-500 text-white rounded-md hover:bg-secondary-600 transition-colors"
-                    >
-                      Go to Course Content
-                      <ChevronRightIcon className="w-5 h-5 ml-2" />
-                    </Link>
-                  ) : (
+                {/* Course stats summary */}
+                <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="bg-neutral-50 p-4 rounded-lg border border-neutral-100">
+                    <h3 className="text-sm text-neutral-500 mb-1">Modules</h3>
+                    <p className="text-xl font-semibold text-neutral-800">{modules?.length || 0}</p>
+                  </div>
+                  <div className="bg-neutral-50 p-4 rounded-lg border border-neutral-100">
+                    <h3 className="text-sm text-neutral-500 mb-1">Lectures</h3>
+                    <p className="text-xl font-semibold text-neutral-800">
+                      {modules?.reduce((count, module) => count + (module.chapters?.length || 0), 0) || 0}
+                    </p>
+                  </div>
+                  <div className="bg-neutral-50 p-4 rounded-lg border border-neutral-100">
+                    <h3 className="text-sm text-neutral-500 mb-1">Assignments</h3>
+                    <p className="text-xl font-semibold text-neutral-800">
+                      {assignmentsQueries.reduce((count, query) => count + (query.data?.length || 0), 0)}
+                    </p>
+                  </div>
+                  <div className="bg-neutral-50 p-4 rounded-lg border border-neutral-100">
+                    <h3 className="text-sm text-neutral-500 mb-1">Quizzes</h3>
+                    <p className="text-xl font-semibold text-neutral-800">
+                      {quizzesQueries.reduce((count, query) => count + (query.data?.length || 0), 0)}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Enrollment button - only shown if not enrolled */}
+                {!isEnrolled && (
+                  <div className="mt-6">
                     <button
                       onClick={handleEnroll}
                       disabled={isEnrolling}
@@ -296,8 +314,22 @@ const CourseDetailsPage: React.FC = () => {
                         </>
                       )}
                     </button>
-                  )}
-                </div>
+                  </div>
+                )}
+
+                {/* Course navigation tabs for enrolled users */}
+                {isEnrolled && (
+                  <div className="mt-6">
+                    <div className="bg-neutral-50 rounded-lg p-4 border border-neutral-100 flex items-center">
+                      <CheckBadgeIcon className="h-5 w-5 text-green-500 mr-2" />
+                      <span className="text-neutral-700">You are enrolled in this course</span>
+                      <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded ml-2">Active</span>
+                    </div>
+                    <p className="text-neutral-600 text-sm mt-4">
+                      All course content is available below. Scroll down to access modules, lectures, quizzes, and assignments.
+                    </p>
+                  </div>
+                )}
               </Card>
               
               {/* Course structure */}
