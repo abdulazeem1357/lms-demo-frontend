@@ -14,6 +14,8 @@ import { PageTransition } from '../../components/common/PageTransition';
 import { getCourseById, getCourseModules, getCourseMaterials } from '../../services/course';
 import { getCourseLiveLectures, getModuleLectures } from '../../services/lecture';
 import { getUserEnrollments, enrollUserInCourse } from '../../services/enrollment';
+// Use mock quizzes for local development and UI testing
+import { getModuleQuizzes } from '../../services/assessment.mock.service';
 
 // Context
 import { useAuth } from '../../contexts/AuthContext';
@@ -127,6 +129,14 @@ const CourseDetailsPage: React.FC = () => {
     queryFn: () => getUserEnrollments(user?.id as string),
     enabled: !!user?.id,
   });
+
+  // Fetch quizzes for each module using useQueries
+  const quizzesQueries = (modules || []).map((module) => ({
+    queryKey: ['moduleQuizzes', module.id],
+    queryFn: () => getModuleQuizzes(module.id),
+    enabled: !!module.id,
+  }));
+  const quizzesResults = useQueryClient().getQueriesData({ predicate: (q) => q.queryKey[0] === 'moduleQuizzes' });
 
   // Check if user is enrolled in this course
   const isEnrolled = React.useMemo(() => {
@@ -356,6 +366,57 @@ const CourseDetailsPage: React.FC = () => {
                   ) : (
                     <div className="p-4 text-center text-neutral-500">
                       No modules available for this course yet.
+                    </div>
+                  )}
+                </div>
+              </Card>
+              {/* Quizzes card (moved below Course Structure) */}
+              <Card className="mb-6">
+                <div className="p-6 border-b border-neutral-200">
+                  <h2 className="text-xl font-heading font-semibold text-neutral-800 flex items-center">
+                    <AcademicCapIcon className="w-5 h-5 mr-2 text-primary-500" />
+                    Quizzes
+                  </h2>
+                </div>
+                <div className="p-4">
+                  {modules && modules.length > 0 ? (
+                    modules.map((module) => {
+                      // Find quizzes for this module from React Query cache
+                      const quizzesData = quizzesResults.find(([key]) => Array.isArray(key) && key[1] === module.id)?.[1] as any[] | undefined;
+                      return (
+                        <div key={module.id} className="mb-4">
+                          <h3 className="font-medium text-neutral-700 mb-2 text-sm">
+                            {module.title}
+                          </h3>
+                          {quizzesData && quizzesData.length > 0 ? (
+                            <ul className="space-y-3">
+                              {quizzesData.map((quiz) => (
+                                <li key={quiz.id} className="bg-neutral-50 border border-neutral-200 rounded-lg p-3 flex flex-col gap-2">
+                                  <div>
+                                    <span className="font-semibold text-neutral-900">{quiz.title}</span>
+                                    {quiz.description && (
+                                      <p className="text-neutral-600 text-xs mt-1">{quiz.description}</p>
+                                    )}
+                                  </div>
+                                  <Link
+                                    to={`/quiz/${quiz.id}`}
+                                    className="inline-flex items-center px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors text-sm font-medium w-max"
+                                  >
+                                    Take Quiz
+                                    <ChevronRightIcon className="w-4 h-4 ml-2" />
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <div className="text-neutral-400 text-xs italic">No quizzes for this module.</div>
+                          )}
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="text-center text-neutral-500 py-4">
+                      No quizzes available for this course yet.
                     </div>
                   )}
                 </div>
