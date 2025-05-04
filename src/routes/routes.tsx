@@ -3,9 +3,9 @@ import { PageTransition } from '../components/common/PageTransition';
 import { LoginPage } from '../pages/Login';
 import { DashboardPage } from '../pages/Dashboard';
 import { ProfileSettingsPage } from '../pages/Profile';
+import { MyCoursesPage } from '../pages/MyCourses';
 
 // Temporarily using placeholder components for the demo
-const CoursesPage = () => <div className="p-8">Courses Page</div>;
 const RegisterPage = () => <div className="p-8">Register Page</div>;
 
 export const publicRoutes = [
@@ -40,7 +40,7 @@ export const protectedRoutes = [
     path: '/courses',
     element: (
       <PageTransition>
-        <CoursesPage />
+        <MyCoursesPage />
       </PageTransition>
     ),
   },
