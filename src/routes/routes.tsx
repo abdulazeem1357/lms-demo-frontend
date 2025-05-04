@@ -4,6 +4,7 @@ import { LoginPage } from '../pages/Login';
 import { DashboardPage } from '../pages/Dashboard';
 import { ProfileSettingsPage } from '../pages/Profile';
 import { MyCoursesPage } from '../pages/MyCourses';
+import { CourseDetailsPage } from '../pages/CourseDetails';
 
 // Temporarily using placeholder components for the demo
 const RegisterPage = () => <div className="p-8">Register Page</div>;
@@ -41,6 +42,14 @@ export const protectedRoutes = [
     element: (
       <PageTransition>
         <MyCoursesPage />
+      </PageTransition>
+    ),
+  },
+  {
+    path: '/courses/:courseId',
+    element: (
+      <PageTransition>
+        <CourseDetailsPage />
       </PageTransition>
     ),
   },
