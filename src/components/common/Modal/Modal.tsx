@@ -101,7 +101,6 @@ const Modal: React.FC<ModalProps> = ({
     return () => window.removeEventListener('keydown', handleEscKeyPress);
   }, [isOpen, closeOnEsc, onClose]);
 
-  // Handle click outside
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (closeOnClickOutside && e.target === e.currentTarget) {
       onClose();
@@ -111,11 +110,23 @@ const Modal: React.FC<ModalProps> = ({
   // Portal container
   const portalContainer = typeof document !== 'undefined' ? document.body : null;
 
-  // Don't render if no portal container or modal is closed
-  if (!portalContainer || !isOpen) return null;
+  // Handle body scroll
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'; // Prevent background scroll
+    } else {
+      document.body.style.overflow = 'unset'; // Restore background scroll
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  // Don't render if no portal container
+  if (!portalContainer) return null;
 
   return createPortal(
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {isOpen && (
         <div 
           className="fixed inset-0 z-50 overflow-y-auto"
@@ -130,21 +141,33 @@ const Modal: React.FC<ModalProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (closeOnClickOutside) {
+                onClose();
+              }
+            }}
           />
           
-          {/* Modal positioning */}
+          {/* Modal container */}
           <div 
-            className="flex min-h-screen items-center justify-center p-4 text-center"
-            onClick={handleBackdropClick}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            onClick={(e) => {
+              // Only close if clicking the backdrop (not modal content)
+              if (e.target === e.currentTarget && closeOnClickOutside) {
+                onClose();
+              }
+            }}
           >
             {/* Modal content */}
             <motion.div
               ref={modalRef}
-              className={`w-full ${sizeClasses} overflow-hidden rounded-lg bg-white text-left shadow-xl`}
+              className={`relative w-full ${sizeClasses} overflow-hidden rounded-lg bg-white text-left shadow-xl`}
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: 'spring', duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()} // Prevent clicks from bubbling to backdrop
             >
               {/* Header with title and close button */}
               {(title || showCloseButton) && (

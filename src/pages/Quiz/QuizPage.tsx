@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { CheckCircleIcon } from '@heroicons/react/24/outline';
 import { getQuizById } from '../../services/assessment';
 import { IQuiz } from '../../types/course.types';
 import { Spinner } from '../../components/common/Spinner';
@@ -37,6 +38,13 @@ export type QuizFormValues = {
   answers: Record<string, string | string[] | boolean>;
 };
 
+// Add interface for submission result
+interface IQuizSubmissionResult {
+  submissionId: string;
+  status: 'submitted';
+  timestamp: string;
+}
+
 /**
  * QuizPage component for displaying and submitting quizzes
  * 
@@ -48,9 +56,8 @@ export type QuizFormValues = {
 const QuizPage: React.FC = () => {
   const { quizId } = useParams<{ quizId: string }>();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const [showResultModal, setShowResultModal] = useState(false);
-  const [submissionResult, setSubmissionResult] = useState<any>(null);
+  const [submissionResult, setSubmissionResult] = useState<IQuizSubmissionResult | null>(null);
 
   // Set up form with react-hook-form
   const {
@@ -77,15 +84,12 @@ const QuizPage: React.FC = () => {
   // Mutation for submitting quiz
   const { mutate: submitQuiz, isPending } = useMutation({
     mutationFn: async (data: QuizFormValues) => {
-      // This is a placeholder - in a real implementation, you would call
-      // a service function like submitQuiz(quizId, data.answers)
-      console.log('Submitting quiz answers:', data);
-      
-      // Mock submission for now
-      return new Promise<any>((resolve) => {
+      // Mock submission for now - include submitted answers count in ID
+      return new Promise<IQuizSubmissionResult>((resolve) => {
         setTimeout(() => {
+          const answersCount = Object.keys(data.answers).length;
           resolve({
-            submissionId: `submission-${Date.now()}`,
+            submissionId: `quiz-${answersCount}-${Date.now()}`,
             status: 'submitted',
             timestamp: new Date().toISOString(),
           });
@@ -96,10 +100,6 @@ const QuizPage: React.FC = () => {
       // Update submission result and show modal
       setSubmissionResult(data);
       setShowResultModal(true);
-      
-      // Invalidate relevant queries
-      queryClient.invalidateQueries({ queryKey: ['userProgress'] });
-      queryClient.invalidateQueries({ queryKey: ['quizAttempts'] });
     },
     onError: (error) => {
       console.error('Error submitting quiz:', error);
@@ -109,6 +109,12 @@ const QuizPage: React.FC = () => {
   // Handler for quiz submission
   const onSubmit: SubmitHandler<QuizFormValues> = (data) => {
     submitQuiz(data);
+  };
+
+  // Handler for modal close
+  const handleModalClose = () => {
+    setShowResultModal(false);
+    navigate(-1);
   };
 
   // Timer expired handler
@@ -224,22 +230,29 @@ const QuizPage: React.FC = () => {
       {/* Results modal */}
       <Modal
         isOpen={showResultModal}
-        onClose={() => navigate('/dashboard')}
+        onClose={handleModalClose}
         title="Quiz Submitted"
+        closeOnClickOutside={false}
+        closeOnEsc={false}
+        showCloseButton={false}
       >
-        <div className="p-4">
-          <p className="text-neutral-700 mb-4">
-            Your quiz has been submitted successfully.
-          </p>
+        <div className="p-6 text-center">
+          <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+            <CheckCircleIcon className="h-10 w-10 text-green-600" />
+          </div>
+          <h3 className="text-lg font-medium text-neutral-900 mb-2">Submission Successful!</h3>
           <p className="text-neutral-600 mb-6">
+            Your quiz has been successfully submitted.
+            <br />
             Submission ID: {submissionResult?.submissionId}
           </p>
-          <div className="flex justify-end">
+          <div className="mt-5">
             <Button
               variant="primary"
-              onClick={() => navigate('/dashboard')}
+              className="w-full"
+              onClick={handleModalClose}
             >
-              Return to Dashboard
+              Return to Course
             </Button>
           </div>
         </div>

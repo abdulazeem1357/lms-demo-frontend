@@ -321,6 +321,9 @@ const AssignmentPage: React.FC = () => {
           onClose={() => setIsSuccessModalOpen(false)}
           title="Assignment Submitted"
           size="sm"
+          closeOnClickOutside={false}
+          closeOnEsc={false}
+          showCloseButton={false}
         >
           <div className="p-6 text-center">
             <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
@@ -334,7 +337,10 @@ const AssignmentPage: React.FC = () => {
               <Button
                 variant="primary"
                 className="w-full"
-                onClick={handleModalClose}
+                onClick={() => {
+                  setIsSuccessModalOpen(false);
+                  navigate(-1);
+                }}
               >
                 Return to Course
               </Button>
