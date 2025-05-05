@@ -159,7 +159,8 @@ export const LoginPage: React.FC = () => {
           </button>
           
           {/* Development login button (for testing) */}
-          {import.meta.env.DEV && (
+          {/* Change condition from DEV to VITE_USE_MOCKS */}
+          {import.meta.env.VITE_USE_MOCKS === 'true' && (
             <button
               type="button"
               className={styles.devLoginButton}
