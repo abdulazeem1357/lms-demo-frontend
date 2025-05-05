@@ -1,56 +1,11 @@
 [
-    {
-      "id": "l1r1a1b2-c3d4-e5f6-g7h8-i9j0k1l2m3n4",
-      "moduleId": "m1r1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5", 
-      "bunnyVideoId": "vid_react_intro_jsx",
-      "title": "Lecture 1.1: What is React and JSX?",
-      "description": "An introduction to the React library and the JSX syntax extension.",
-      "duration": 950,
-      "createdAt": "2025-04-02T10:00:00Z"
-    },
-    {
-      "id": "l1r2b2c3-d4e5-f6g7-h8i9-j0k1l2m3n4o5",
-      "moduleId": "m1r1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5", 
-      "bunnyVideoId": "vid_react_components_props",
-      "title": "Lecture 1.2: Components and Props",
-      "description": "Understanding functional components and how to pass data using props.",
-      "duration": 1230, 
-      "createdAt": "2025-04-03T11:15:00Z"
-    },
-    {
-      "id": "l1r3c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
-      "moduleId": "m1r1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5", 
-      "bunnyVideoId": "vid_react_state_events",
-      "title": "Lecture 1.3: Introduction to State and Events",
-      "description": "Managing component state with useState and handling user events.",
-      "duration": 1500, 
-      "createdAt": "2025-04-04T09:30:00Z"
-    },
-    {
-      "id": "l2r1d4e5-f6g7-h8i9-j0k1-l2m3n4o5p6q7",
-      "moduleId": "m1r2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6", 
-      "bunnyVideoId": "vid_react_hooks_useeffect",
-      "title": "Lecture 2.1: Deep Dive into useEffect",
-      "description": "Exploring the useEffect hook for side effects, cleanup, and dependencies.",
-      "duration": 1855, 
-      "createdAt": "2025-04-11T14:00:00Z"
-    },
-    {
-      "id": "l2r2e5f6-g7h8-i9j0-k1l2-m3n4o5p6q7r8",
-      "moduleId": "m1r2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6", 
-      "bunnyVideoId": "vid_react_hooks_usecontext",
-      "title": "Lecture 2.2: Managing Global State with useContext",
-      "description": "Using the useContext hook to avoid prop drilling.",
-      "duration": 1100,
-      "createdAt": "2025-04-12T10:45:00Z"
-    },
-    {
-      "id": "l3j1f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9",
-      "moduleId": "m2j1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
-      "bunnyVideoId": "vid_js_async_await",
-      "title": "Lecture 1.1: Asynchronous JavaScript with Async/Await",
-      "description": "Understanding promises and simplifying async code with async/await.",
-      "duration": 1340,
-      "createdAt": "2025-03-16T09:00:00Z"
-    }
-  ]
+  {
+    "id": "l1py1",
+    "moduleId": "m1n2o3p4-q5r6-s7t8-u9v0-w1x2y3z4a5b6", 
+    "bunnyVideoId": "vid_python_intro",
+    "title": "Lecture 1.1: Introduction to Python",
+    "description": "An overview of Python programming and its applications.",
+    "duration": 1200,
+    "createdAt": "2025-05-01T10:00:00Z"
+  }
+]

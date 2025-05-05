@@ -1,98 +1,21 @@
 {
-    "overall": [
-      {
-        "userId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-        "coursesEnrolled": 2,
-        "coursesCompleted": 1,
-        "overallCompletionRate": 50.0,
-        "averageScore": 86.7
-      }
-    ],
-    "courseSpecific": [
-      {
-        "userId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-        "courseId": "f7a1b2c3-d4e5-6789-0abc-1d2e3f4a5b6c",
-        "courseTitle": "Introduction to React",
-        "completionStatus": "in_progress",
-        "quizzes": [
-          {
-            "quizId": "q1r1a1b2-c3d4-e5f6-g7h8-i9j0k1l2m3n4",
-            "title": "Quiz 1: React Basics",
-            "score": 18,
-            "maxScore": 20,
-            "status": "graded",
-            "gradedAt": "2025-04-05T08:30:00Z"
-          },
-          {
-            "quizId": "q2r1b2c3-d4e5-f6g7-h8i9-j0k1l2m3n4o5",
-            "title": "Quiz 2: Understanding Hooks",
-            "score": 25,
-            "maxScore": 30,
-            "status": "graded",
-            "gradedAt": "2025-04-13T09:45:10Z"
-          }
-        ],
-        "assignments": [
-          {
-            "assignmentId": "a1r1a1b2-c3d4-e5f6-g7h8-i9j0k1l2m3n4",
-            "title": "Assignment 1: Build a Simple React Component",
-            "score": 90,
-            "maxScore": 100,
-            "status": "graded",
-            "gradedAt": "2025-05-15T10:00:00Z"
-          },
-          {
-            "assignmentId": "a2r1b2c3-d4e5-f6g7-h8i9-j0k1l2m3n4o5",
-            "title": "Assignment 2: Implement a Counter with Hooks",
-            "score": 85,
-            "maxScore": 100,
-            "status": "graded",
-            "gradedAt": "2025-05-21T11:00:00Z"
-          }
-        ]
-      },
-      {
-        "userId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-        "courseId": "a2b3c4d5-e6f7-8901-2abc-3d4e5f6a7b8c",
-        "courseTitle": "Advanced JavaScript",
-        "completionStatus": "completed",
-        "quizzes": [
-          {
-            "quizId": "q3j1c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
-            "title": "Quiz 1: ES6+ Features",
-            "score": 88,
-            "maxScore": 100,
-            "status": "graded",
-            "gradedAt": "2025-03-18T09:00:00Z"
-          }
-        ],
-        "assignments": [
-          {
-            "assignmentId": "a3j1c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
-            "title": "Assignment 1: Refactor with Async/Await",
-            "score": 95,
-            "maxScore": 100,
-            "status": "graded",
-            "gradedAt": "2025-05-11T12:00:00Z"
-          }
-        ]
-      },
-      {
-        "userId": "d4e5f6a7-b8c9-0123-4567-890abcdef012",
-        "courseId": "f7a1b2c3-d4e5-6789-0abc-1d2e3f4a5b6c",
-        "courseTitle": "Introduction to React",
-        "completionStatus": "in_progress",
-        "quizzes": [
-          {
-            "quizId": "q1r1a1b2-c3d4-e5f6-g7h8-i9j0k1l2m3n4",
-            "title": "Quiz 1: React Basics",
-            "score": 15,
-            "maxScore": 20,
-            "status": "graded",
-            "gradedAt": "2025-04-30T10:00:00Z"
-          }
-        ],
-        "assignments": []
-      }
-    ]
-  }
+  "overall": [
+    {
+      "userId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      "coursesEnrolled": 1,
+      "coursesCompleted": 0,
+      "overallCompletionRate": 0.0,
+      "averageScore": 0.0
+    }
+  ],
+  "courseSpecific": [
+    {
+      "userId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      "courseId": "c1d2e3f4-g5h6-i7j8-k9l0-m1n2o3p4q5r6",
+      "courseTitle": "Introduction to Python",
+      "completionStatus": "in_progress",
+      "quizzes": [],
+      "assignments": []
+    }
+  ]
+}

@@ -1,30 +1,9 @@
 [
-    {
-      "id": "ll1a1b2c-3d4e-5f6g-7h8i-9j0k1l2m3n4o",
-      "topic": "React Hooks Q&A Session",
-      "meetingUrl": "https://meet.lms-example.com/session/react-hooks-qa-1",
-      "startTime": "2025-05-10T14:00:00Z",
-      "endTime": "2025-05-10T15:00:00Z"
-    },
-    {
-      "id": "ll2b2c3d-4e5f-6g7h-8i9j-0k1l2m3n4o5p",
-      "topic": "Advanced JavaScript Patterns Discussion",
-      "meetingUrl": "https://meet.lms-example.com/session/js-patterns-1",
-      "startTime": "2025-05-12T10:00:00Z",
-      "endTime": "2025-05-12T11:30:00Z"
-    },
-    {
-      "id": "ll3c3d4e-5f6g-7h8i-9j0k-1l2m3n4o5p6q",
-      "topic": "TypeScript Generics Workshop",
-      "meetingUrl": "https://meet.lms-example.com/session/ts-generics-ws-1",
-      "startTime": "2025-05-17T09:00:00Z",
-      "endTime": "2025-05-17T10:00:00Z"
-    },
-    {
-      "id": "ll4d4e5f-6g7h-8i9j-0k1l-2m3n4o5p6q7r",
-      "topic": "UI/UX Design Principles Review",
-      "meetingUrl": "https://meet.lms-example.com/session/uiux-review-1",
-      "startTime": "2025-05-20T16:00:00Z",
-      "endTime": "2025-05-20T17:00:00Z"
-    }
-  ]
+  {
+    "id": "ll1py1",
+    "topic": "Python Basics Q&A Session",
+    "meetingUrl": "https://meet.lms-example.com/session/python-basics-qa-1",
+    "startTime": "2025-05-06T14:00:00Z",
+    "endTime": "2025-05-06T15:00:00Z"
+  }
+]

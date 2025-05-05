@@ -1,57 +1,13 @@
 [
-    {
-      "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-      "username": "alice_student",
-      "email": "alice.student@lms-example.com",
-      "firstName": "Alice",
-      "lastName": "Wonder",
-      "role": "Student",
-      "isActive": true,
-      "createdAt": "2025-04-15T10:00:00Z",
-      "updatedAt": "2025-04-20T11:30:00Z"
-    },
-    {
-      "id": "b2c3d4e5-f6a7-8901-2345-67890abcdef0",
-      "username": "bob_instructor",
-      "email": "bob.instructor@lms-example.com",
-      "firstName": "Bob",
-      "lastName": "Builder",
-      "role": "Instructor",
-      "isActive": true,
-      "createdAt": "2025-03-01T09:00:00Z",
-      "updatedAt": "2025-05-01T14:00:00Z"
-    },
-    {
-      "id": "c3d4e5f6-a7b8-9012-3456-7890abcdef01",
-      "username": "charlie_admin",
-      "email": "charlie.admin@lms-example.com",
-      "firstName": "Charlie",
-      "lastName": "Chaplin",
-      "role": "Admin",
-      "isActive": false,
-      "createdAt": "2025-01-10T08:00:00Z",
-      "updatedAt": "2025-04-25T16:45:00Z"
-    },
-    {
-      "id": "d4e5f6a7-b8c9-0123-4567-890abcdef012",
-      "username": "diana_student_inactive",
-      "email": "diana.student.inactive@lms-example.com",
-      "firstName": "Diana",
-      "lastName": "Prince",
-      "role": "Student",
-      "isActive": false,
-      "createdAt": "2025-04-28T12:00:00Z",
-      "updatedAt": "2025-04-28T12:00:00Z"
-    },
-    {
-      "id": "e5f6a7b8-c9d0-1234-5678-90abcdef0123",
-      "username": "edward_instructor",
-      "email": "edward.instructor@lms-example.com",
-      "firstName": "Edward",
-      "lastName": "Scissorhands",
-      "role": "Instructor",
-      "isActive": true,
-      "createdAt": "2025-02-14T11:00:00Z",
-      "updatedAt": "2025-04-30T09:15:00Z"
-    }
-  ]
+  {
+    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "username": "alice_student",
+    "email": "alice.student@lms-example.com",
+    "firstName": "Alice",
+    "lastName": "Wonder",
+    "role": "Student",
+    "isActive": true,
+    "createdAt": "2025-05-01T10:00:00Z",
+    "updatedAt": "2025-05-01T10:00:00Z"
+  }
+]

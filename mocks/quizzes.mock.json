@@ -1,70 +1,10 @@
 [
-    {
-      "id": "q1r1a1b2-c3d4-e5f6-g7h8-i9j0k1l2m3n4",
-      "moduleId": "m1r1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
-      "title": "Quiz 1: React Basics",
-      "description": "Test your knowledge of fundamental React concepts like JSX, components, and props.",
-      "createdAt": "2025-04-05T08:00:00Z",
-      "updatedAt": "2025-04-05T08:00:00Z"
-    },
-    {
-      "id": "q2r1b2c3-d4e5-f6g7-h8i9-j0k1l2m3n4o5",
-      "moduleId": "m1r2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6",
-      "title": "Quiz 2: Understanding Hooks",
-      "description": "Assess your understanding of useState, useEffect, and useContext.",
-      "createdAt": "2025-04-13T09:00:00Z",
-      "updatedAt": "2025-04-14T10:15:00Z"
-    },
-    {
-      "id": "q3j1c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
-      "moduleId": "m2j1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
-      "title": "Quiz 1: ES6+ Features",
-      "description": "Check your grasp of modern JavaScript syntax and features.",
-      "createdAt": "2025-03-17T10:00:00Z",
-      "updatedAt": "2025-03-17T10:00:00Z"
-    },
-    {
-      "id": "q4t1d4e5-f6g7-h8i9-j0k1-l2m3n4o5p6q7",
-      "moduleId": "m3t1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
-      "title": "Quiz 1: TypeScript Fundamentals",
-      "createdAt": "2025-03-01T11:00:00Z",
-      "updatedAt": "2025-03-01T11:00:00Z"
-    },
-    {
-      "id": "quiz-demo-1",
-      "moduleId": "m1r1a2b3-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
-      "title": "Demo Quiz: React Fundamentals",
-      "description": "A sample quiz for testing the QuizPage UI.",
-      "createdAt": "2025-05-04T10:00:00Z",
-      "updatedAt": "2025-05-04T10:00:00Z",
-      "timeLimit": 180,
-      "questions": [
-        {
-          "id": "q1",
-          "quizId": "quiz-demo-1",
-          "type": "single_choice",
-          "text": "What does JSX stand for?",
-          "options": [
-            { "id": "a", "text": "JavaScript XML" },
-            { "id": "b", "text": "Java Syntax Extension" },
-            { "id": "c", "text": "JavaScript Xtreme" }
-          ],
-          "order": 1
-        },
-        {
-          "id": "q2",
-          "quizId": "quiz-demo-1",
-          "type": "true_false",
-          "text": "React is maintained by Facebook.",
-          "order": 2
-        },
-        {
-          "id": "q3",
-          "quizId": "quiz-demo-1",
-          "type": "short_answer",
-          "text": "Name a React hook.",
-          "order": 3
-        }
-      ]
-    }
-  ]
+  {
+    "id": "q1r2s3t4-u5v6-w7x8-y9z0-a1b2c3d4e5f6",
+    "moduleId": "m1n2o3p4-q5r6-s7t8-u9v0-w1x2y3z4a5b6",
+    "title": "Quiz 1: Python Basics",
+    "description": "Test your knowledge of Python syntax and basic programming concepts.",
+    "createdAt": "2025-05-01T10:00:00Z",
+    "updatedAt": "2025-05-01T10:00:00Z"
+  }
+]
