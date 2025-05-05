@@ -101,12 +101,6 @@ const Modal: React.FC<ModalProps> = ({
     return () => window.removeEventListener('keydown', handleEscKeyPress);
   }, [isOpen, closeOnEsc, onClose]);
 
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (closeOnClickOutside && e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
   // Portal container
   const portalContainer = typeof document !== 'undefined' ? document.body : null;
 

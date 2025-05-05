@@ -2,7 +2,6 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient, useQueries } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import { motion } from 'framer-motion';
 
 // Components
 import { Card } from '../../components/common/Card';

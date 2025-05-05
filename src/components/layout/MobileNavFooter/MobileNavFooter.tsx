@@ -7,10 +7,6 @@ import {
   RiBookLine,
   RiUserFill,
   RiUserLine,
-  RiBellFill,
-  RiBellLine,
-  RiSearchFill,
-  RiSearchLine
 } from 'react-icons/ri';
 
 type NavItem = {

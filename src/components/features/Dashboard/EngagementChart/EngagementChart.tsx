@@ -18,7 +18,6 @@ import {
 import { getEngagementStats } from '../../../../services/analytics';
 
 // Components
-import Card from '../../../common/Card/Card';
 import Spinner from '../../../common/Spinner/Spinner';
 import StateDisplay from '../../../common/StateDisplay/StateDisplay';
 
@@ -199,7 +198,7 @@ const EngagementChart: React.FC<EngagementChartProps> = ({
   }
 
   // Custom tooltip for the chart
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white p-3 border border-neutral-200 shadow-md rounded-md">

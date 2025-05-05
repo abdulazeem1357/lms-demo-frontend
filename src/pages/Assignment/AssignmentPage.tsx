@@ -142,12 +142,6 @@ const AssignmentPage: React.FC = () => {
     });
   }, [selectedFile, assignmentId, comments, submitAssignmentMutation]);
 
-  // Handle modal close and navigation
-  const handleModalClose = useCallback(() => {
-    setIsSuccessModalOpen(false);
-    navigate(-1);
-  }, [navigate]);
-
   // Handle comments change with proper typing
   const handleCommentsChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setComments(e.target.value);
