@@ -15,7 +15,14 @@
       "courseTitle": "Introduction to Python",
       "completionStatus": "in_progress",
       "quizzes": [],
-      "assignments": []
+      "assignments": [],
+      "lectures": [
+        {
+          "lectureId": "l1py1",
+          "status": "watched",
+          "watchedAt": "2023-10-01T10:00:00Z"
+        }
+      ]
     }
   ]
 }

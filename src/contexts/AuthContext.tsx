@@ -86,19 +86,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         const token = localStorage.getItem('authToken');
         if (token) {
-          // TODO: Add token validation or user info retrieval
-          // Temporary: Set authenticated without user data
-          setUser({
-            id: 'temp',
-            username: 'user123',
-            email: 'user@example.com',
-            firstName: 'User',
-            lastName: 'Test',
-            role: 'Student',
-            isActive: true,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-          });
+          // When restoring session, use the DUMMY_USER data for consistent mock data
+          setUser(DUMMY_USER);
         }
       } catch (err) {
         console.error('Authentication initialization error:', err);

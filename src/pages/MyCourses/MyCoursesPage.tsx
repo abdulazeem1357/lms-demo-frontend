@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 
 // Services
 import { getUserEnrollments } from '../../services/enrollment';
-import { getUserCourseProgress } from '../../services/progress';
+import { useCourseProgress } from '../../hooks/useCourseProgress';
 
 // Components
 import { Card } from '../../components/common/Card';
@@ -46,14 +46,7 @@ const CheckIcon = () => (
 
 const SORT_OPTIONS = [
   { value: 'title', label: 'Course Title' },
-  { value: 'enrolledAt', label: 'Enrollment Date' },
-  { value: 'progress', label: 'Progress' }
-];
-
-const FILTER_OPTIONS = [
-  { value: 'all', label: 'All Courses' },
-  { value: 'in_progress', label: 'In Progress' },
-  { value: 'completed', label: 'Completed' }
+  { value: 'enrolledAt', label: 'Enrollment Date' }
 ];
 
 /**
@@ -65,16 +58,13 @@ const MyCoursesPage: React.FC = () => {
   
   // State for filtering and sorting
   const [sortBy, setSortBy] = useState<string>('title');
-  const [filterStatus, setFilterStatus] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   
   // UI state
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState<boolean>(false);
-  const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);
   
   // Refs for dropdown closing on outside click
   const sortDropdownRef = useRef<HTMLDivElement>(null);
-  const filterDropdownRef = useRef<HTMLDivElement>(null);
   
   // Fetch enrolled courses
   const {
@@ -88,62 +78,12 @@ const MyCoursesPage: React.FC = () => {
     queryFn: () => user?.id ? getUserEnrollments(user.id) : Promise.resolve([]),
     enabled: !!user?.id,
   });
-
-  // Get course progress for all enrollments
-  const { data: progressData } = useQuery({
-    queryKey: ['allCourseProgress', user?.id, enrollments],
-    queryFn: async () => {
-      if (!user?.id || !enrollments?.length) return {};
-      
-      // Create a map to store progress for each course
-      const progressMap: Record<string, { completionStatus: 'in_progress' | 'completed', percentage: number }> = {};
-      
-      // Fetch progress for each enrolled course
-      await Promise.all(
-        enrollments.map(async (enrollment) => {
-          try {
-            const progress = await getUserCourseProgress(user.id, enrollment.course.id);
-            
-            // Calculate percentage based on completion status
-            const percentage = progress.completionStatus === 'completed' 
-              ? 100 
-              : calculateProgress(progress.quizzes, progress.assignments);
-              
-            progressMap[enrollment.course.id] = {
-              completionStatus: progress.completionStatus,
-              percentage
-            };
-          } catch (err) {
-            console.error(`Error fetching progress for course ${enrollment.course.id}:`, err);
-          }
-        })
-      );
-      
-      return progressMap;
-    },
-    enabled: !!user?.id && !!enrollments?.length,
-  });
-  
-  // Helper function to calculate progress percentage
-  const calculateProgress = (quizzes: any[], assignments: any[]): number => {
-    const total = quizzes.length + assignments.length;
-    if (total === 0) return 0;
-    
-    const completed = 
-      quizzes.filter(q => q.status === 'graded').length + 
-      assignments.filter(a => a.status === 'graded').length;
-    
-    return Math.round((completed / total) * 100);
-  };
   
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (sortDropdownRef.current && !sortDropdownRef.current.contains(event.target as Node)) {
         setIsSortDropdownOpen(false);
-      }
-      if (filterDropdownRef.current && !filterDropdownRef.current.contains(event.target as Node)) {
-        setIsFilterDropdownOpen(false);
       }
     };
 
@@ -156,43 +96,25 @@ const MyCoursesPage: React.FC = () => {
   // Filter and sort courses
   const filteredCourses = useMemo(() => {
     if (!enrollments) return [];
-    
     // Apply search filter
-    let filtered = searchQuery 
-      ? enrollments.filter(e => 
+    const filtered = searchQuery
+      ? enrollments.filter(e =>
           e.course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
           e.course.description.toLowerCase().includes(searchQuery.toLowerCase())
         )
       : [...enrollments];
-    
-    // Apply status filter
-    if (filterStatus !== 'all' && progressData) {
-      filtered = filtered.filter(e => {
-        const courseProgress = progressData[e.course.id];
-        return courseProgress?.completionStatus === filterStatus;
-      });
-    }
-    
-    // Apply sorting
+    // Sort
     return filtered.sort((a, b) => {
       if (sortBy === 'title') {
         return a.course.title.localeCompare(b.course.title);
-      } else if (sortBy === 'enrolledAt') {
-        return new Date(b.enrolledAt).getTime() - new Date(a.enrolledAt).getTime();
-      } else if (sortBy === 'progress' && progressData) {
-        const progressA = progressData[a.course.id]?.percentage || 0;
-        const progressB = progressData[b.course.id]?.percentage || 0;
-        return progressB - progressA;
       }
-      return 0;
+      // enrolledAt
+      return new Date(b.enrolledAt).getTime() - new Date(a.enrolledAt).getTime();
     });
-  }, [enrollments, searchQuery, sortBy, filterStatus, progressData]);
+  }, [enrollments, searchQuery, sortBy]);
 
   // Get current sort option label
   const currentSortLabel = SORT_OPTIONS.find(option => option.value === sortBy)?.label || 'Course Title';
-  
-  // Get current filter option label
-  const currentFilterLabel = FILTER_OPTIONS.find(option => option.value === filterStatus)?.label || 'All Courses';
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -269,52 +191,11 @@ const MyCoursesPage: React.FC = () => {
                 </div>
               )}
             </div>
-            
-            {/* Filter Dropdown */}
-            <div className="relative" ref={filterDropdownRef}>
-              <button 
-                className={`w-full sm:w-auto flex items-center justify-between px-4 py-2 border border-neutral-300 rounded-md bg-white ${filterStatus !== 'all' ? 'bg-blue-100' : ''} whitespace-nowrap`}
-                onClick={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)}
-              >
-                <span className="flex items-center text-sm whitespace-nowrap">
-                  <FilterIcon className="mr-2 text-neutral-500" />
-                  <span className="font-medium text-neutral-800 whitespace-nowrap">{currentFilterLabel}</span>
-                </span>
-                <ChevronDownIcon />
-              </button>
-              
-              {isFilterDropdownOpen && (
-                <div className="absolute right-0 mt-1 w-56 bg-white rounded-md border border-neutral-200 shadow-lg z-10">
-                  <ul className="py-1">
-                    {FILTER_OPTIONS.map((option) => (
-                      <li key={option.value}>
-                        <button
-                          className="w-full text-left px-4 py-2 text-sm hover:bg-neutral-100 flex items-center justify-between"
-                          onClick={() => {
-                            setFilterStatus(option.value);
-                            setIsFilterDropdownOpen(false);
-                          }}
-                        >
-                          <span className={filterStatus === option.value ? 'font-medium text-primary-600' : 'text-neutral-700'}>
-                            {option.label}
-                          </span>
-                          {filterStatus === option.value && (
-                            <span className="text-primary-600">
-                              <CheckIcon />
-                            </span>
-                          )}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
           </div>
         </div>
         
         {/* Active filters display */}
-        {(searchQuery || filterStatus !== 'all') && (
+        {searchQuery && (
           <div className="px-4 py-3 bg-neutral-50 border-t border-neutral-200 rounded-b-lg flex flex-wrap items-center">
             <span className="text-sm text-neutral-600 mr-2">Active filters:</span>
             {searchQuery && (
@@ -330,25 +211,11 @@ const MyCoursesPage: React.FC = () => {
                 </button>
               </span>
             )}
-            {filterStatus !== 'all' && (
-              <span className="inline-flex items-center m-1 bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
-                {filterStatus === 'completed' ? 'Completed' : 'In Progress'}
-                <button 
-                  className="ml-2 text-blue-800 hover:text-blue-900"
-                  onClick={() => setFilterStatus('all')}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 101.414 1.414L10 11.414l1.293 1.293a1 1 001.414-1.414L11.414 10l1.293-1.293a1 1 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                  </svg>
-                </button>
-              </span>
-            )}
-            {(searchQuery || filterStatus !== 'all') && (
+            {searchQuery && (
               <button 
                 className="ml-auto text-sm text-primary-600 hover:text-primary-700 font-medium focus:outline-none"
                 onClick={() => {
                   setSearchQuery('');
-                  setFilterStatus('all');
                 }}
               >
                 Clear all filters
@@ -387,7 +254,7 @@ const MyCoursesPage: React.FC = () => {
       {/* Empty state */}
       {!isLoading && !isError && filteredCourses.length === 0 && (
         <div className="flex flex-col items-center justify-center py-16">
-          {searchQuery || filterStatus !== 'all' ? (
+          {searchQuery ? (
             <StateDisplay
               type="empty"
               title="No matching courses found"
@@ -397,7 +264,6 @@ const MyCoursesPage: React.FC = () => {
                   className="mt-4 px-6 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700 transition-colors"
                   onClick={() => {
                     setSearchQuery('');
-                    setFilterStatus('all');
                   }}
                 >
                   Clear Filters
@@ -441,23 +307,14 @@ interface CourseCardProps {
   enrollment: IUserEnrollment;
 }
 
-// Move progress fetching logic into CourseCard for reliability and consistency
+// Component for individual course card, using useCourseProgress hook
 const CourseCard: React.FC<CourseCardProps> = ({ enrollment }) => {
   const { course, enrolledAt } = enrollment;
   const { user } = useAuth();
 
-  // Fetch progress for this course and user
-  const { data: progress } = useQuery({
-    queryKey: ['courseProgress', user?.id, course.id],
-    queryFn: () => user?.id ? getUserCourseProgress(user.id, course.id) : Promise.resolve(undefined),
-    enabled: !!user?.id,
-  });
-
+  // Use custom hook for progress
+  const { completionPercentage, isLoading } = useCourseProgress(user?.id || '', course.id);
   const enrollmentDate = format(new Date(enrolledAt), 'MMM d, yyyy');
-  // Calculate completion percentage based on status
-  const completionPercentage = progress?.completionStatus === 'completed' 
-    ? 100 
-    : Math.floor(Math.random() * 100); // Fallback for demo; replace with actual data when available
 
   return (
     <Card hoverable className="flex flex-col h-full overflow-hidden">
@@ -475,14 +332,18 @@ const CourseCard: React.FC<CourseCardProps> = ({ enrollment }) => {
           <p className="text-neutral-600 text-sm mb-4 line-clamp-2">{course.description}</p>
           
           <div className="mt-auto">
-            <ProgressBar
-              value={completionPercentage}
-              label="Your Progress"
-              showPercentage
-              height="md"
-              color={progress?.completionStatus === 'completed' ? 'success' : 'primary'}
-              className="mb-2"
-            />
+            {isLoading ? (
+              <div className="h-4 bg-neutral-200 rounded animate-pulse mb-2 w-full"></div>
+            ) : (
+              <ProgressBar
+                value={completionPercentage}
+                label="Your Progress"
+                showPercentage
+                height="md"
+                color={completionPercentage === 100 ? 'success' : 'primary'}
+                className="mb-2"
+              />
+            )}
             <p className="text-xs text-neutral-500 mt-3">Enrolled on {enrollmentDate}</p>
           </div>
         </div>

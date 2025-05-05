@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 // Services
 import * as enrollmentService from '../../../../services/enrollment';
-import * as progressService from '../../../../services/progress';
 
 // Components
 import { Card } from '../../../common/Card';
@@ -15,6 +14,7 @@ import { StateDisplay } from '../../../common/StateDisplay';
 // Types
 import { IUserEnrollment } from '../../../../types/enrollment.types';
 import { useAuth } from '../../../../contexts/AuthContext';
+import { useCourseProgress } from '../../../../hooks/useCourseProgress';
 
 /**
  * Widget that displays a grid of enrolled courses with progress indicators
@@ -125,46 +125,41 @@ interface CourseCardProps {
  */
 const CourseCard: React.FC<CourseCardProps> = ({ enrollment, userId }) => {
   const { course, enrolledAt } = enrollment;
-  
-  // Get course progress
-  const { data: progress } = useQuery({
-    queryKey: ['courseProgress', userId, course.id],
-    queryFn: () => progressService.getUserCourseProgress(userId, course.id),
-    enabled: !!userId,
-  });
-  
-  // Calculate completion percentage based on status
-  const completionPercentage = progress?.completionStatus === 'completed' 
-    ? 100 
-    : Math.floor(Math.random() * 100); // Fallback for demo; replace with actual data when available
-  
+
+  // Use custom hook to get completion percentage and loading state
+  const { completionPercentage, isLoading } = useCourseProgress(userId, course.id);
+
   // Format enrollment date
   const enrollmentDate = new Date(enrolledAt).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
     day: 'numeric'
   });
-  
+
   return (
     <Card hoverable className="flex flex-col h-full">
       <Link to={`/courses/${course.id}`} className="block h-full">
-        {/* Thumbnail placeholder - replace with actual images when available */}
+        {/* Thumbnail placeholder */}
         <div className="h-40 bg-secondary-100 relative overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center bg-neutral-200">
             <span className="text-neutral-600">Course Image</span>
           </div>
         </div>
-        
+
         <div className="p-4 flex flex-col flex-grow">
           <h3 className="font-medium text-lg text-neutral-900 mb-1">{course.title}</h3>
           <p className="text-neutral-600 text-sm mb-3 line-clamp-2">{course.description}</p>
-          
+
           <div className="mt-auto">
-            <ProgressBar 
-              value={completionPercentage} 
-              label="Progress"
-              showPercentage
-            />
+            {isLoading ? (
+              <div className="h-6 bg-neutral-200 rounded animate-pulse w-3/4"></div>
+            ) : (
+              <ProgressBar
+                value={completionPercentage}
+                label="Progress"
+                showPercentage
+              />
+            )}
             <p className="text-xs text-neutral-500 mt-2">Enrolled on {enrollmentDate}</p>
           </div>
         </div>

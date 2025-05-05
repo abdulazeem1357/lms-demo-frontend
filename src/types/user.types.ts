@@ -110,7 +110,20 @@ export interface IUser {
     status: 'pending' | 'graded';
     gradedAt: string;        // ISO 8601 timestamp
   }
+
+  /**
+   * Progress details for a user on a specific lecture.
+   */
+  export interface ILectureProgress {
+    lectureId: string; // Corresponds to ILecture.id
+    status: 'watched' | 'not_watched';
+    watchedAt?: string; // Optional: ISO 8601 timestamp when completed
+    // Add watchPercentage or lastPosition if needed for more granular tracking
+  }
   
+  /**
+   * Progress details for a user within a specific course.
+   */
   export interface IUserCourseSpecificProgress {
     userId: string;
     courseId: string;
@@ -118,6 +131,9 @@ export interface IUser {
     completionStatus: 'in_progress' | 'completed';
     quizzes: IQuizProgress[];
     assignments: IAssignmentProgress[];
+    lectures: ILectureProgress[]; // <-- Add this line
+    // lastAccessed?: string; // Optional
+    // overallScore?: number; // Optional
   }
   
   /**
