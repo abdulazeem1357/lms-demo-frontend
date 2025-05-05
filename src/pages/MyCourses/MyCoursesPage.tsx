@@ -273,12 +273,12 @@ const MyCoursesPage: React.FC = () => {
             {/* Filter Dropdown */}
             <div className="relative" ref={filterDropdownRef}>
               <button 
-                className={`w-full sm:w-auto flex items-center justify-between px-4 py-2 border border-neutral-300 rounded-md bg-white ${filterStatus !== 'all' ? 'bg-blue-100' : ''}`}
+                className={`w-full sm:w-auto flex items-center justify-between px-4 py-2 border border-neutral-300 rounded-md bg-white ${filterStatus !== 'all' ? 'bg-blue-100' : ''} whitespace-nowrap`}
                 onClick={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)}
               >
-                <span className="flex items-center text-sm">
+                <span className="flex items-center text-sm whitespace-nowrap">
                   <FilterIcon className="mr-2 text-neutral-500" />
-                  <span className="font-medium text-neutral-800">{currentFilterLabel}</span>
+                  <span className="font-medium text-neutral-800 whitespace-nowrap">{currentFilterLabel}</span>
                 </span>
                 <ChevronDownIcon />
               </button>
