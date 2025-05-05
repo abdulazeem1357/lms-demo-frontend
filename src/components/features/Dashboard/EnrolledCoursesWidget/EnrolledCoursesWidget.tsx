@@ -156,8 +156,11 @@ const CourseCard: React.FC<CourseCardProps> = ({ enrollment, userId }) => {
             ) : (
               <ProgressBar
                 value={completionPercentage}
-                label="Progress"
+                label="Your Progress"
                 showPercentage
+                height="md"
+                color={completionPercentage === 100 ? 'success' : 'primary'}
+                className="mb-2"
               />
             )}
             <p className="text-xs text-neutral-500 mt-2">Enrolled on {enrollmentDate}</p>
