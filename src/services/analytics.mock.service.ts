@@ -2,7 +2,7 @@ import {
   IEngagementStats, 
   IEngagementStatsParams 
 } from '../types/analytics.types';
-import { subDays, differenceInDays, eachDayOfInterval, eachWeekOfInterval, format, parseISO } from 'date-fns';
+import { subDays, eachDayOfInterval, eachWeekOfInterval, format } from 'date-fns';
 
 // Generate a series of data points for a given date range
 function generateTimeSeriesData(

@@ -85,7 +85,7 @@ const mockActivities: IActivityItem[] = [
  * Mock implementation of getUserActivity
  */
 export async function getUserActivity(
-  userId: string,
+  _userId: string,
   params?: { 
     limit?: number; 
     page?: number;

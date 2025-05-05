@@ -8,11 +8,8 @@ import assignments from '../../mocks/assignments.mock.json';
 import {
   ICourse,
   ICourseListResponse,
-  ICourseDetailResponse,
   IModule,
-  ICourseStructureResponse,
   ICourseMaterial,
-  ICourseMaterialListResponse,
   ILecture,
   ILectureListResponse, // <-- Import this type
   ILiveLecture,
@@ -29,11 +26,11 @@ function getModulesByCourseId(courseId: string): IModule[] {
   return (courseDetails as Record<string, IModule[]>)[courseId] || [];
 }
 
-function getMaterialsByCourseId(courseId: string): ICourseMaterial[] {
+function getMaterialsByCourseId(_courseId: string): ICourseMaterial[] {
   return (courseMaterials as ICourseMaterial[]);
 }
 
-export async function getCourses(params?: Partial<Pick<IPagination, 'page' | 'limit'>> & { search?: string; category?: string; difficulty?: string }): Promise<ICourseListResponse> {
+export async function getCourses(_params?: Partial<Pick<IPagination, 'page' | 'limit'>> & { search?: string; category?: string; difficulty?: string }): Promise<ICourseListResponse> {
   return Promise.resolve({
     data: courses as ICourse[],
     meta: {
@@ -135,12 +132,12 @@ export async function deleteLecture(_lectureId: string): Promise<void> {
 }
 
 // --- Live Lectures ---
-export async function getCourseLiveLectures(courseId: string): Promise<ILiveLecture[]> {
+export async function getCourseLiveLectures(_courseId: string): Promise<ILiveLecture[]> {
   // For mock, return all live lectures (or filter by courseId if your mock supports it)
   return Promise.resolve(liveLectures as ILiveLecture[]);
 }
 
-export async function createCourseLiveLecture(courseId: string, payload: Omit<ILiveLecture, 'id'>): Promise<ILiveLecture> {
+export async function createCourseLiveLecture(_courseId: string, payload: Omit<ILiveLecture, 'id'>): Promise<ILiveLecture> {
   const newLiveLecture: ILiveLecture = {
     id: `mock-${Math.random().toString(36).slice(2)}`,
     ...payload,
@@ -148,13 +145,13 @@ export async function createCourseLiveLecture(courseId: string, payload: Omit<IL
   return Promise.resolve(newLiveLecture);
 }
 
-export async function updateCourseLiveLecture(courseId: string, liveLectureId: string, payload: Partial<Omit<ILiveLecture, 'id'>>): Promise<ILiveLecture> {
+export async function updateCourseLiveLecture(_courseId: string, liveLectureId: string, payload: Partial<Omit<ILiveLecture, 'id'>>): Promise<ILiveLecture> {
   const lecture = (liveLectures as ILiveLecture[]).find(l => l.id === liveLectureId);
   if (!lecture) throw new Error('Live lecture not found');
   return Promise.resolve({ ...lecture, ...payload });
 }
 
-export async function deleteCourseLiveLecture(courseId: string, liveLectureId: string): Promise<void> {
+export async function deleteCourseLiveLecture(_courseId: string, _liveLectureId: string): Promise<void> {
   return Promise.resolve();
 }
 

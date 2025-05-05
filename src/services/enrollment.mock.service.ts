@@ -4,7 +4,7 @@ import { IUserEnrollment, IEnrollmentCreateResponse, ICourseEnrollment } from '.
 /**
  * Returns mock enrollments for a user (GET /users/{userId}/enrollments)
  */
-export async function getUserEnrollments(userId: string): Promise<IUserEnrollment[]> {
+export async function getUserEnrollments(_userId: string): Promise<IUserEnrollment[]> {
   // Optionally filter by userId if your mock data supports it
   return Promise.resolve((enrollments.userEnrollments as IUserEnrollment[]));
 }
@@ -24,14 +24,14 @@ export async function enrollUserInCourse(userId: string, courseId: string): Prom
 /**
  * Mocks unenrolling a user from a course (DELETE /users/{userId}/enrollments/{enrollmentId})
  */
-export async function unenrollUserFromCourse(userId: string, enrollmentId: string): Promise<void> {
+export async function unenrollUserFromCourse(_userId: string, _enrollmentId: string): Promise<void> {
   return Promise.resolve();
 }
 
 /**
  * Returns mock enrollments for a course (GET /courses/{courseId}/enrollments)
  */
-export async function getCourseEnrollments(courseId: string): Promise<ICourseEnrollment[]> {
+export async function getCourseEnrollments(_courseId: string): Promise<ICourseEnrollment[]> {
   // Optionally filter by courseId if your mock data supports it
   return Promise.resolve((enrollments.courseEnrollments as ICourseEnrollment[]));
 }

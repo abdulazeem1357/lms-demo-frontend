@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getLectureById } from '../../services/lecture';
-import { ILecture } from '../../types/course.types';
-
 // Import existing common components
 import { Spinner } from '../../components/common/Spinner';
 import { StateDisplay } from '../../components/common/StateDisplay';
@@ -18,8 +16,6 @@ import Button from '../../components/common/Button/Button';
 const VideoPlayer = ({ 
   src, 
   drmToken,
-  onError,
-  onBuffering
 }: { 
   src: string; 
   drmToken?: string;

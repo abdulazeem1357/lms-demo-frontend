@@ -7,14 +7,6 @@ import {
   ICourseStructureResponse,
   ILecture,
   ILectureListResponse,
-  ILectureDetailResponse,
-  ILiveLecture,
-  ILiveLectureListResponse,
-  ILiveLectureDetailResponse,
-  IQuiz,
-  IQuizListResponse,
-  IAssignment,
-  IAssignmentListResponse,
   ICourseMaterial,
   ICourseMaterialListResponse
 } from '../types/course.types';

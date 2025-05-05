@@ -84,10 +84,10 @@ export async function updateUserProfile(
 /**
  * Changes the current user's password.
  * @param currentPassword The user's current password
- * @param newPassword The new password to set
+ * @param _newPassword The new password to set
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function changePassword(currentPassword: string, newPassword: string): Promise<void> {
+export async function changePassword(currentPassword: string, _newPassword: string): Promise<void> {
   // Simulating API call delay
   await new Promise(resolve => setTimeout(resolve, 1200));
   

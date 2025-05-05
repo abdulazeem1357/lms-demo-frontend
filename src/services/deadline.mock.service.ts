@@ -28,11 +28,19 @@ interface IMockAssignment {
 interface IMockQuiz {
   id: string;
   title: string;
-  description?: string;
+  description: string;
   moduleId: string;
-  dueDate: string;
   createdAt: string;
   updatedAt: string;
+  timeLimit: number;
+  questions: Array<{
+    id: string;
+    quizId: string;
+    type: string;
+    text: string;
+    options: Array<any>;
+    order: number;
+  }>;
 }
 
 interface IMockLiveLecture {
@@ -43,6 +51,19 @@ interface IMockLiveLecture {
   endTime: string;
   createdAt?: string;
   updatedAt?: string;
+}
+
+// Import mock data with proper typing
+const mockAssignments = assignments as IMockAssignment[];
+const mockQuizzes = quizzes as IMockQuiz[];
+const mockLiveLectures = liveLectures as IMockLiveLecture[];
+const mockCourses = courses as IMockCourse[];
+
+// Helper: Find course by moduleId
+function findCourseByModuleId(moduleId: string): IMockCourse | undefined {
+  return mockCourses.find(c => 
+    (c.modules || []).some(m => m.id === moduleId)
+  );
 }
 
 // Helper: Create deadline from assignment
@@ -64,6 +85,10 @@ function createDeadlineFromAssignment(assignment: IMockAssignment, course: IMock
 
 // Helper: Create deadline from quiz
 function createDeadlineFromQuiz(quiz: IMockQuiz, course: IMockCourse): IDeadline {
+  // Calculate due date as 7 days from creation for mock data
+  const dueDate = new Date(quiz.createdAt);
+  dueDate.setDate(dueDate.getDate() + 7);
+
   return {
     id: quiz.id,
     type: 'quiz',
@@ -72,7 +97,7 @@ function createDeadlineFromQuiz(quiz: IMockQuiz, course: IMockCourse): IDeadline
     courseId: course.id,
     courseName: course.title,
     moduleId: quiz.moduleId,
-    dueDate: quiz.dueDate,
+    dueDate: dueDate.toISOString(),
     url: `/courses/${course.id}/quizzes/${quiz.id}`,
     createdAt: quiz.createdAt,
     updatedAt: quiz.updatedAt
@@ -99,40 +124,34 @@ function createDeadlineFromLiveLecture(lecture: IMockLiveLecture, course: IMockC
  */
 export async function getUpcomingDeadlines(params: IDeadlineParams = {}): Promise<IDeadline[]> {
   const limit = params.limit || 10;
-
-  // Get all deadlines from different sources
   const deadlines: IDeadline[] = [];
 
   // Convert assignments to deadlines
-  (assignments as IMockAssignment[]).forEach(assignment => {
-    const course = (courses as IMockCourse[]).find(c => {
-      const modules = c.modules || [];
-      return modules.some((m: IMockModule) => m.id === assignment.moduleId);
-    });
+  mockAssignments.forEach(assignment => {
+    const course = findCourseByModuleId(assignment.moduleId);
     if (course) {
       deadlines.push(createDeadlineFromAssignment(assignment, course));
     }
   });
 
   // Convert quizzes to deadlines
-  (quizzes as IMockQuiz[]).forEach(quiz => {
-    const course = (courses as IMockCourse[]).find(c => {
-      const modules = c.modules || [];
-      return modules.some((m: IMockModule) => m.id === quiz.moduleId);
-    });
+  mockQuizzes.forEach(quiz => {
+    const course = findCourseByModuleId(quiz.moduleId);
     if (course) {
       deadlines.push(createDeadlineFromQuiz(quiz, course));
     }
   });
 
-  // For live lectures, we'll associate them with the first course as a demo
-  // In a real implementation, this would be handled by proper course associations
-  const defaultCourse = (courses as IMockCourse[])[0];
-  if (defaultCourse) {
-    (liveLectures as unknown as IMockLiveLecture[]).forEach(lecture => {
-      deadlines.push(createDeadlineFromLiveLecture(lecture, defaultCourse));
-    });
-  }
+  // Associate live lectures with their proper courses
+  // In a real implementation, live lectures would have courseId
+  mockLiveLectures.forEach(lecture => {
+    // For demo purposes, distribute live lectures across available courses
+    const courseIndex = Math.floor(Math.random() * mockCourses.length);
+    const course = mockCourses[courseIndex];
+    if (course) {
+      deadlines.push(createDeadlineFromLiveLecture(lecture, course));
+    }
+  });
 
   // Filter by date range if specified
   let filteredDeadlines = deadlines;
