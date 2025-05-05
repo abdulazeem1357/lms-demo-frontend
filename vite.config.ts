@@ -8,5 +8,6 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: '/lms-demo',
+  // Update base to match the GitHub Pages repository name
+  base: '/lms-demo-frontend/',
 })

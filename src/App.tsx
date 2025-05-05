@@ -6,7 +6,7 @@ import { AppRouter } from './routes/AppRouter';
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/lms-demo-frontend/">
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <AppRouter />
