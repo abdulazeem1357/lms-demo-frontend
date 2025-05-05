@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
+import { MagnifyingGlassIcon, ChevronDownIcon, CheckIcon } from '@heroicons/react/24/outline';
 
 // Services
 import { getUserEnrollments } from '../../services/enrollment';
@@ -18,25 +19,6 @@ import { useAuth } from '../../contexts/AuthContext';
 
 // Types
 import { IUserEnrollment } from '../../types/enrollment.types';
-
-// Icons - Import these from your icon library (e.g., heroicons)
-const SearchIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-    <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
-  </svg>
-);
-
-const ChevronDownIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-  </svg>
-);
-
-const CheckIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-  </svg>
-);
 
 const SORT_OPTIONS = [
   { value: 'title', label: 'Course Title' },
@@ -133,7 +115,7 @@ const MyCoursesPage: React.FC = () => {
           {/* Search input with icon */}
           <div className="relative w-full md:w-1/2 lg:w-2/3 mb-4 md:mb-0">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-neutral-500">
-              <SearchIcon />
+              <MagnifyingGlassIcon className="h-5 w-5" />
             </div>
             <input
               type="text"
@@ -155,7 +137,7 @@ const MyCoursesPage: React.FC = () => {
                   <span className="text-neutral-500 mr-2">Sort By:</span>
                   <span className="font-medium text-neutral-800">{currentSortLabel}</span>
                 </span>
-                <ChevronDownIcon />
+                <ChevronDownIcon className="h-5 w-5" />
               </button>
               
               {isSortDropdownOpen && (
@@ -175,7 +157,7 @@ const MyCoursesPage: React.FC = () => {
                           </span>
                           {sortBy === option.value && (
                             <span className="text-primary-600">
-                              <CheckIcon />
+                              <CheckIcon className="h-5 w-5" />
                             </span>
                           )}
                         </button>
