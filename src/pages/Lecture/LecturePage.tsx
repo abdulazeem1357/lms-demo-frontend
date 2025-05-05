@@ -7,59 +7,9 @@ import { ILecture } from '../../types/course.types';
 // Import existing common components
 import { Spinner } from '../../components/common/Spinner';
 import { StateDisplay } from '../../components/common/StateDisplay';
+import Button from '../../components/common/Button/Button';
 
-// TODO: Create these components once they're available
-// import { VideoPlayer } from '../../components/features/CourseContent/VideoPlayer';
-// import { NotesSidebar } from '../../components/features/CourseContent/NotesSidebar';
-// import { Button } from '../../components/common/Button';
-
-/**
- * Simple button component
- * TODO: Replace with actual Button component when available
- */
-const Button = ({ 
-  children, 
-  onClick, 
-  disabled = false,
-  variant = 'primary',
-  as = 'button',
-  to = ''
-}: { 
-  children: React.ReactNode;
-  onClick?: () => void;
-  disabled?: boolean;
-  variant?: 'primary' | 'secondary' | 'outline';
-  as?: 'button' | 'link';
-  to?: string;
-}) => {
-  const baseStyles = "inline-flex items-center justify-center px-4 py-2 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2";
-  const variantStyles = {
-    primary: "bg-primary-500 hover:bg-primary-600 text-white focus:ring-primary-500",
-    secondary: "bg-neutral-200 hover:bg-neutral-300 text-neutral-800 focus:ring-neutral-500",
-    outline: "bg-white border border-neutral-300 text-neutral-700 hover:bg-neutral-50 focus:ring-primary-500"
-  };
-  const disabledStyles = "opacity-50 cursor-not-allowed";
-
-  const classes = `${baseStyles} ${variantStyles[variant]} ${disabled ? disabledStyles : ''}`;
-
-  if (as === 'link' && !disabled) {
-    return (
-      <Link to={to} className={classes}>
-        {children}
-      </Link>
-    );
-  }
-
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className={classes}
-    >
-      {children}
-    </button>
-  );
-};
+// Remove local Button component
 
 /**
  * Simple video player component
@@ -246,22 +196,28 @@ const LecturePage: React.FC = () => {
             
             {/* Lecture navigation */}
             <div className="flex justify-between items-center mt-8">
-              <Button 
-                as="link" 
-                to={`/lecture/${previousLecture?.id}`}
-                variant="outline"
-                disabled={!previousLecture}
-              >
-                &larr; Previous Lecture
-              </Button>
-              
-              <Button 
-                as="link"
-                to={`/lecture/${nextLecture?.id}`}
-                disabled={!nextLecture}
-              >
-                Next Lecture &rarr;
-              </Button>
+              {previousLecture ? (
+                <Link to={`/lecture/${previousLecture.id}`}>
+                  <Button variant="outline">
+                    &larr; Previous Lecture
+                  </Button>
+                </Link>
+              ) : (
+                <Button variant="outline" disabled>
+                  &larr; Previous Lecture
+                </Button>
+              )}
+              {nextLecture ? (
+                <Link to={`/lecture/${nextLecture.id}`}>
+                  <Button>
+                    Next Lecture &rarr;
+                  </Button>
+                </Link>
+              ) : (
+                <Button disabled>
+                  Next Lecture &rarr;
+                </Button>
+              )}
             </div>
           </div>
           
