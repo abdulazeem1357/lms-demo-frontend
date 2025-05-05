@@ -458,8 +458,6 @@ const CourseCard: React.FC<CourseCardProps> = ({ enrollment }) => {
   const completionPercentage = progress?.completionStatus === 'completed' 
     ? 100 
     : Math.floor(Math.random() * 100); // Fallback for demo; replace with actual data when available
-  const statusLabel = progress?.completionStatus === 'completed' ? 'Completed' : 'In Progress';
-  const statusClass = progress?.completionStatus === 'completed' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800';
 
   return (
     <Card hoverable className="flex flex-col h-full overflow-hidden">
@@ -469,11 +467,6 @@ const CourseCard: React.FC<CourseCardProps> = ({ enrollment }) => {
           <div className="absolute inset-0 flex items-center justify-center">
             <span className="text-neutral-600">Course Image</span>
           </div>
-        </div>
-        
-        {/* Status badge */}
-        <div className="absolute top-2 right-2">
-          <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusClass}`}>{statusLabel}</span>
         </div>
         
         {/* Course details */}
