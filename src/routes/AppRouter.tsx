@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { ProtectedRoute, AuthErrorHandler } from './guards';
 import { publicRoutes, protectedRoutes } from './routes';
+import { MainLayout } from '../components/layout/MainLayout';
 
 /**
  * Main router component that handles route configuration and animation
@@ -19,12 +20,18 @@ export const AppRouter: React.FC = () => {
             <Route key={path} path={path} element={element} />
           ))}
           
-          {/* Protected Routes */}
+          {/* Protected Routes - Wrapped with MainLayout for the mobile nav footer */}
           {protectedRoutes.map(({ path, element }) => (
             <Route 
               key={path} 
               path={path} 
-              element={<ProtectedRoute>{element}</ProtectedRoute>} 
+              element={
+                <ProtectedRoute>
+                  <MainLayout>
+                    {element}
+                  </MainLayout>
+                </ProtectedRoute>
+              } 
             />
           ))}
         </Routes>
