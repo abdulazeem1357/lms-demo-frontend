@@ -8,6 +8,7 @@ import { CourseDetailsPage } from '../pages/CourseDetails';
 import { LecturePage } from '../pages/Lecture';
 import QuizPage from '../pages/Quiz';
 import { AssignmentPage } from '../pages/Assignment';
+import SecureVideoPlayerPage from '../pages/Lecture/SecureVideoPlayerPage';
 
 // Temporarily using placeholder components for the demo
 const RegisterPage = () => <div className="p-8">Register Page</div>;
@@ -85,6 +86,14 @@ export const protectedRoutes = [
     element: (
       <PageTransition>
         <AssignmentPage />
+      </PageTransition>
+    ),
+  },
+  {
+    path: '/courses/:courseId/lectures/:lectureId/secure-video',
+    element: (
+      <PageTransition>
+        <SecureVideoPlayerPage />
       </PageTransition>
     ),
   },

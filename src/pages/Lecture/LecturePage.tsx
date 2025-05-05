@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react'; // Removed useState
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getLectureById } from '../../services/lecture';
@@ -6,51 +6,23 @@ import { getLectureById } from '../../services/lecture';
 import { Spinner } from '../../components/common/Spinner';
 import { StateDisplay } from '../../components/common/StateDisplay';
 import Button from '../../components/common/Button/Button';
+import { PlayCircleIcon } from '@heroicons/react/24/solid'; // Import Play icon
 
-// Remove local Button component
-
-/**
- * Simple video player component
- * TODO: Replace with actual VideoPlayer component when available
- */
-const VideoPlayer = ({ 
-  src, 
-  drmToken,
-}: { 
-  src: string; 
-  drmToken?: string;
-  onError?: () => void;
-  onBuffering?: (isBuffering: boolean) => void;
-}) => (
-  <div className="relative w-full aspect-video bg-black rounded-lg overflow-hidden">
-    <div className="absolute inset-0 flex items-center justify-center text-neutral-400">
-      <div className="text-center">
-        <div className="text-3xl mb-4">🎬</div>
-        <div className="text-sm">
-          {src ? (
-            <>Video Player - Source: {src.substring(0, 30)}...</>
-          ) : (
-            <>Video source not available</>
-          )}
-          {drmToken && <div className="mt-2 text-xs">DRM protected content</div>}
-        </div>
-      </div>
-    </div>
-  </div>
-);
+// Removed placeholder VideoPlayer component
 
 /**
  * Simple notes sidebar component
  * TODO: Replace with actual NotesSidebar component when available
  */
 const NotesSidebar = ({ lectureId }: { lectureId: string }) => (
-  <div className="bg-white rounded-lg p-4 border border-neutral-200">
-    <h3 className="font-medium text-lg mb-4">Lecture Notes</h3>
+  // ... (NotesSidebar implementation remains the same)
+  <div className="bg-white rounded-lg p-4 border border-neutral-200 shadow-sm"> {/* Added shadow-sm */}
+    <h3 className="font-medium text-lg mb-4 text-neutral-800">Lecture Notes</h3> {/* Adjusted text color */}
     <div className="text-sm text-neutral-600">
       Notes for lecture: {lectureId}
     </div>
     <textarea
-      className="w-full mt-4 p-3 border border-neutral-300 rounded-md resize-none h-64 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+      className="w-full mt-4 p-3 border border-neutral-300 rounded-md resize-none h-64 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm" // Added text-sm
       placeholder="Take notes here..."
     />
     <div className="mt-2 text-xs text-neutral-500 text-right">
@@ -60,15 +32,15 @@ const NotesSidebar = ({ lectureId }: { lectureId: string }) => (
 );
 
 /**
- * LecturePage component for displaying video lecture content and associated notes
+ * LecturePage component for displaying lecture details and providing access to the secure video player.
  */
 const LecturePage: React.FC = () => {
-  const { lectureId = '' } = useParams<{ lectureId: string }>();
-  const [isBuffering, setIsBuffering] = useState(false);
-  const [playerError, setPlayerError] = useState<string | null>(null);
-  
+  // Assuming courseId is available in the route, e.g., /courses/:courseId/lectures/:lectureId
+  const { courseId = 'c1d2e3f4-g5h6-i7j8-k9l0-m1n2o3p4q5r6', lectureId = 'l1py1' } = useParams<{ courseId: string; lectureId: string }>();
+  // Removed player-specific state (isBuffering, playerError)
+
   // Fetch lecture details
-  const { 
+  const {
     data: lecture,
     isLoading: isLectureLoading,
     isError: isLectureError,
@@ -80,27 +52,14 @@ const LecturePage: React.FC = () => {
     enabled: !!lectureId,
   });
 
-  // TODO: Implement these queries when services are available
-  // For now, we'll just simulate having previous and next lectures
+  // TODO: Implement actual previous/next lecture logic based on course structure/API
   const previousLecture = {
-    id: '123',
+    id: 'l1js1', // Example previous lecture ID from mock data
     title: 'Previous Lecture (Simulated)'
-  };
-  
-  const nextLecture = {
-    id: '456',
+  }; // Example: No previous lecture
+  const nextLecture = { // Example: Next lecture exists
+    id: 'l2js1', // Example next lecture ID from mock data
     title: 'Next Lecture (Simulated)'
-  };
-
-  // Get video streaming URL from bunnyVideoId
-  // TODO: Use proper video streaming service to get the URL
-  const getVideoStreamUrl = (bunnyVideoId: string) => {
-    return `https://video.cdn.example.com/stream/${bunnyVideoId}/manifest.m3u8`;
-  };
-
-  // Handle video player errors
-  const handleVideoError = () => {
-    setPlayerError('Failed to load video. Please try again.');
   };
 
   // Loading state
@@ -112,39 +71,43 @@ const LecturePage: React.FC = () => {
     );
   }
 
-  // Error state
-  if (isLectureError) {
+  // Error state - Combined error and not found logic
+  if (isLectureError || !lecture) {
+    const title = isLectureError ? "Failed to load lecture" : "Lecture not found";
+    const message = isLectureError
+      ? (error instanceof Error ? error.message : "Failed to load lecture details. Please try again.")
+      : "The requested lecture could not be found.";
+    const showTryAgain = isLectureError; // Only show Try Again if it was a fetch error
+
     return (
       <div className="container mx-auto p-8 max-w-4xl">
         <StateDisplay
-          type="error"
-          title="Failed to load lecture"
-          message={error instanceof Error ? error.message : "Failed to load lecture details. Please try again."}
+          type="error" // Use error type for both scenarios
+          title={title}
+          message={message}
           actionButton={
-            <button 
-              className="mt-2 px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors"
-              onClick={() => refetchLecture()}
-            >
-              Try again
-            </button>
+            showTryAgain ? (
+              <Button
+                onClick={() => refetchLecture()}
+                variant="primary" // Use common Button component
+              >
+                Try again
+              </Button>
+            ) : (
+              <Link to={courseId ? `/courses/${courseId}` : '/courses'}> {/* Link back to course or courses list */}
+                <Button variant="primary">
+                  {courseId ? 'Back to Course' : 'Back to Courses'}
+                </Button>
+              </Link>
+            )
           }
         />
       </div>
     );
   }
 
-  // Empty state
-  if (!lecture) {
-    return (
-      <div className="container mx-auto p-8 max-w-4xl">
-        <StateDisplay
-          type="empty"
-          title="Lecture not found"
-          message="The requested lecture could not be found."
-        />
-      </div>
-    );
-  }
+  // Construct the path to the secure video player page
+  const secureVideoPath = `/courses/${courseId}/lectures/${lectureId}/secure-video`;
 
   return (
     <div className="bg-neutral-50 min-h-screen py-8">
@@ -152,48 +115,45 @@ const LecturePage: React.FC = () => {
         <div className="lg:grid lg:grid-cols-3 lg:gap-8">
           {/* Main content column */}
           <div className="lg:col-span-2 space-y-6">
+            {/* Lecture Title and Description */}
             <div>
-              <h1 className="text-2xl font-heading font-bold text-neutral-900 mb-4">{lecture.title}</h1>
+              <h1 className="text-3xl font-heading font-bold text-neutral-900 mb-2">{lecture.title}</h1> {/* Increased title size */}
               {lecture.description && (
-                <p className="text-neutral-700 mb-6">{lecture.description}</p>
+                <p className="text-neutral-700 text-base mb-6">{lecture.description}</p>
               )}
             </div>
-            
-            {/* Video player with loading overlay */}
-            <div className="relative">
-              <VideoPlayer 
-                src={getVideoStreamUrl(lecture.bunnyVideoId)}
-                onBuffering={setIsBuffering}
-                onError={handleVideoError}
-              />
-              {isBuffering && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                  <Spinner size="lg" color="white" />
-                </div>
-              )}
-              {playerError && (
-                <div className="mt-4">
-                  <StateDisplay 
-                    type="error" 
-                    title="Video Error"
-                    message={playerError}
-                    actionButton={
-                      <button 
-                        className="mt-2 px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors"
-                        onClick={() => setPlayerError(null)}
-                      >
-                        Try again
-                      </button>
-                    }
-                  />
-                </div>
-              )}
+
+            {/* Secure Video Player Launch Section */}
+            <div className="bg-white p-6 rounded-lg border border-neutral-200 shadow-sm"> {/* Added container styling */}
+              <h2 className="text-xl font-semibold text-neutral-800 mb-4">Watch Lecture Video</h2>
+              <div className="relative group cursor-pointer rounded-lg overflow-hidden border border-neutral-300 hover:border-primary-500 transition-colors">
+                <Link to={secureVideoPath} aria-label={`Play secure video for ${lecture.title}`}>
+                  {/* Placeholder Thumbnail - Replace with actual thumbnail if available */}
+                  <div className="aspect-video bg-gradient-to-br from-neutral-200 to-neutral-300 flex items-center justify-center">
+                     <PlayCircleIcon className="w-16 h-16 text-neutral-500 group-hover:text-primary-600 transition-colors" />
+                  </div>
+                  {/* Play Overlay */}
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-opacity flex items-center justify-center">
+                    <PlayCircleIcon className="w-20 h-20 text-white opacity-0 group-hover:opacity-90 transition-opacity duration-300" />
+                  </div>
+                </Link>
+              </div>
+              <p className="mt-3 text-sm text-neutral-600">
+                Click the video above to watch the lecture in our secure player. This content is DRM protected.
+              </p>
+               <Link to={secureVideoPath} className="mt-4 inline-block">
+                 <Button variant="primary" size="lg"> {/* Larger primary button */}
+                   <PlayCircleIcon className="w-5 h-5 mr-2" />
+                   Watch Lecture Now
+                 </Button>
+               </Link>
             </div>
-            
+
             {/* Lecture navigation */}
-            <div className="flex justify-between items-center mt-8">
+            <div className="flex justify-between items-center mt-8 pt-6 border-t border-neutral-200">
               {previousLecture ? (
-                <Link to={`/lecture/${previousLecture.id}`}>
+                // Use courseId in the link if available
+                <Link to={`/courses/${courseId}/lectures/${previousLecture.id}`}>
                   <Button variant="outline">
                     &larr; Previous Lecture
                   </Button>
@@ -204,19 +164,20 @@ const LecturePage: React.FC = () => {
                 </Button>
               )}
               {nextLecture ? (
-                <Link to={`/lecture/${nextLecture.id}`}>
-                  <Button>
+                 // Use courseId in the link if available
+                <Link to={`/courses/${courseId}/lectures/${nextLecture.id}`}>
+                  <Button variant="primary"> {/* Use primary for next */}
                     Next Lecture &rarr;
                   </Button>
                 </Link>
               ) : (
-                <Button disabled>
+                <Button variant="primary" disabled>
                   Next Lecture &rarr;
                 </Button>
               )}
             </div>
           </div>
-          
+
           {/* Sidebar column */}
           <div className="lg:col-span-1 mt-8 lg:mt-0">
             <NotesSidebar lectureId={lectureId} />
