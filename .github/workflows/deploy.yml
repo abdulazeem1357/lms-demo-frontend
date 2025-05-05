@@ -38,6 +38,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build
+        # Add env block here to make variables available to the build command
+        env:
+          VITE_USE_MOCKS: true # Set the variable from your .env file
         run: npm run build
       # Add this step to copy index.html to 404.html
       - name: Copy index.html to 404.html
