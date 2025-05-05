@@ -35,5 +35,84 @@
         "order": 3
       }
     ]
+  },
+  {
+    "id": "quiz-js-1",
+    "moduleId": "m-js-intro-1",
+    "title": "Quiz: JavaScript Variables & Functions",
+    "description": "Test your knowledge of JavaScript variable scope and function types.",
+    "createdAt": "2025-05-05T09:00:00Z",
+    "updatedAt": "2025-05-05T09:00:00Z",
+    "timeLimit": 300,
+    "questions": [
+      {
+        "id": "qjs1",
+        "quizId": "quiz-js-1",
+        "type": "single_choice",
+        "text": "Which keyword declares a block-scoped variable?",
+        "options": [
+          { "id": "a", "text": "var" },
+          { "id": "b", "text": "let" },
+          { "id": "c", "text": "const" },
+          { "id": "d", "text": "Both let and const" }
+        ],
+        "order": 1
+      },
+      {
+        "id": "qjs2",
+        "quizId": "quiz-js-1",
+        "type": "true_false",
+        "text": "Arrow functions have their own 'this' context.",
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz-react-1",
+    "moduleId": "m-react-state-1",
+    "title": "Quiz: Zustand Basics",
+    "description": "Check your understanding of Zustand's core concepts.",
+    "createdAt": "2025-05-05T10:00:00Z",
+    "updatedAt": "2025-05-05T10:00:00Z",
+    "timeLimit": 240,
+    "questions": [
+      {
+        "id": "qreact1",
+        "quizId": "quiz-react-1",
+        "type": "single_choice",
+        "text": "How do you create a Zustand store?",
+        "options": [
+          { "id": "a", "text": "createStore()" },
+          { "id": "b", "text": "create()" },
+          { "id": "c", "text": "new Zustand()" }
+        ],
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "quiz-js-2",
+    "moduleId": "m-js-dom-2",
+    "title": "Quiz: DOM Events",
+    "description": "Test your knowledge of handling events in the DOM.",
+    "createdAt": "2025-05-05T14:30:00Z",
+    "updatedAt": "2025-05-05T14:30:00Z",
+    "timeLimit": 200,
+    "questions": [
+      {
+        "id": "qjsdom1",
+        "quizId": "quiz-js-2",
+        "type": "true_false",
+        "text": "Event bubbling means the event travels from the target element up to the root.",
+        "order": 1
+      },
+      {
+        "id": "qjsdom2",
+        "quizId": "quiz-js-2",
+        "type": "short_answer",
+        "text": "Which method is used to stop event propagation?",
+        "order": 2
+      }
+    ]
   }
 ]

@@ -17,5 +17,79 @@
         }
       ]
     }
+  ],
+  "js101-a2b3-c4d5-e6f7-g8h9i0j1k2l3": [
+    {
+      "id": "m-js-intro-1",
+      "title": "Module 1: JavaScript Core Concepts",
+      "order": 1,
+      "chapters": [
+        {
+          "id": "ch-js-vars",
+          "title": "Chapter 1: Variables and Scope",
+          "order": 1
+        },
+        {
+          "id": "ch-js-funcs",
+          "title": "Chapter 2: Functions and Closures",
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "m-js-dom-2",
+      "title": "Module 2: DOM Manipulation",
+      "order": 2,
+      "chapters": [
+        {
+          "id": "ch-js-select",
+          "title": "Chapter 3: Selecting Elements",
+          "order": 1
+        },
+        {
+          "id": "ch-js-events",
+          "title": "Chapter 4: Handling Events",
+          "order": 2
+        }
+      ]
+    }
+  ],
+  "react-adv-b3c4-d5e6-f7g8-h9i0j1k2l3m4": [
+    {
+      "id": "m-react-state-1",
+      "title": "Module 1: Advanced State Management",
+      "order": 1,
+      "chapters": [
+        {
+          "id": "ch-react-zustand",
+          "title": "Chapter 1: Introduction to Zustand",
+          "order": 1
+        },
+        {
+          "id": "ch-react-context-perf",
+          "title": "Chapter 2: Context API Performance",
+          "order": 2
+        }
+      ]
+    }
+  ],
+  "data-sci-py-c4d5-e6f7-g8h9-i0j1k2l3m4n5": [
+    {
+      "id": "m-ds-pandas-1",
+      "title": "Module 1: Data Manipulation with Pandas",
+      "order": 1,
+      "chapters": [
+        {
+          "id": "ch-ds-dataframe",
+          "title": "Chapter 1: Introduction to DataFrames",
+          "order": 1
+        },
+        {
+          "id": "ch-ds-cleaning",
+          "title": "Chapter 2: Data Cleaning Techniques",
+          "order": 2
+        }
+      ]
+    }
   ]
 }

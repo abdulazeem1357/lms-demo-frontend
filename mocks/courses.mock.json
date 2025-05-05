@@ -7,5 +7,32 @@
     "difficulty": "beginner",
     "createdAt": "2025-05-01T10:00:00Z",
     "updatedAt": "2025-05-01T10:00:00Z"
+  },
+  {
+    "id": "js101-a2b3-c4d5-e6f7-g8h9i0j1k2l3",
+    "title": "JavaScript Fundamentals",
+    "description": "Master the core concepts of JavaScript, including variables, functions, DOM manipulation, and asynchronous programming.",
+    "category": "Web Development",
+    "difficulty": "beginner",
+    "createdAt": "2025-05-02T11:00:00Z",
+    "updatedAt": "2025-05-02T11:00:00Z"
+  },
+  {
+    "id": "react-adv-b3c4-d5e6-f7g8-h9i0j1k2l3m4",
+    "title": "Advanced React Patterns",
+    "description": "Explore advanced React techniques like state management with Zustand, performance optimization, and custom hooks.",
+    "category": "Web Development",
+    "difficulty": "intermediate",
+    "createdAt": "2025-05-03T12:00:00Z",
+    "updatedAt": "2025-05-03T12:00:00Z"
+  },
+  {
+    "id": "data-sci-py-c4d5-e6f7-g8h9-i0j1k2l3m4n5",
+    "title": "Data Science with Python",
+    "description": "Learn how to use Python libraries like Pandas, NumPy, and Matplotlib for data analysis and visualization.",
+    "category": "Data Science",
+    "difficulty": "intermediate",
+    "createdAt": "2025-05-04T13:00:00Z",
+    "updatedAt": "2025-05-04T13:00:00Z"
   }
 ]

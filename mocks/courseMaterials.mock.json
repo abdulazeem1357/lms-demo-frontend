@@ -6,5 +6,55 @@
     "type": "file",
     "url": "https://cdn.lms.example.com/files/python_syllabus_v1.pdf",
     "createdAt": "2025-05-01T10:00:00Z"
+  },
+  {
+    "c1d2e3f4-g5h6-i7j8-k9l0-m1n2o3p4q5r6": [
+      {
+        "id": "mat1py1",
+        "moduleId": "m1n2o3p4-q5r6-s7t8-u9v0-w1x2y3z4a5b6",
+        "title": "Python Cheat Sheet",
+        "type": "pdf",
+        "url": "/mocks/materials/python_cheat_sheet.pdf",
+        "createdAt": "2025-05-01T10:05:00Z"
+      }
+    ],
+    "js101-a2b3-c4d5-e6f7-g8h9i0j1k2l3": [
+      {
+        "id": "mat1js1",
+        "moduleId": "m-js-intro-1",
+        "title": "JavaScript ES6+ Features Overview",
+        "type": "link",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference",
+        "createdAt": "2025-05-02T11:15:00Z"
+      },
+      {
+        "id": "mat2js1",
+        "moduleId": "m-js-dom-2",
+        "title": "DOM Manipulation Examples",
+        "type": "code_snippet",
+        "url": "/mocks/materials/dom_examples.js",
+        "createdAt": "2025-05-02T11:45:00Z"
+      }
+    ],
+    "react-adv-b3c4-d5e6-f7g8-h9i0j1k2l3m4": [
+      {
+        "id": "mat1react1",
+        "moduleId": "m-react-state-1",
+        "title": "Zustand Official Documentation",
+        "type": "link",
+        "url": "https://github.com/pmndrs/zustand",
+        "createdAt": "2025-05-03T12:20:00Z"
+      }
+    ],
+    "data-sci-py-c4d5-e6f7-g8h9-i0j1k2l3m4n5": [
+      {
+        "id": "mat1ds1",
+        "moduleId": "m-ds-pandas-1",
+        "title": "Pandas DataFrame Guide",
+        "type": "pdf",
+        "url": "/mocks/materials/pandas_guide.pdf",
+        "createdAt": "2025-05-04T13:25:00Z"
+      }
+    ]
   }
 ]

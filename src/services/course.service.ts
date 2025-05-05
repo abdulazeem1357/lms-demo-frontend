@@ -91,6 +91,16 @@ export async function deleteCourseModule(courseId: string, moduleId: string): Pr
 }
 
 /**
+ * Fetches all pre-recorded lectures for a specific course.
+ * @param courseId - The ID of the course.
+ * @returns A promise resolving to the list of lectures for the course.
+ */
+export async function getCourseLectures(courseId: string): Promise<ILectureListResponse> {
+  const { data } = await apiClient.get<ILectureListResponse>(`/courses/${courseId}/lectures`);
+  return data;
+}
+
+/**
  * Fetches pre-recorded lectures for a module.
  */
 export async function getModuleLectures(moduleId: string): Promise<ILecture[]> {

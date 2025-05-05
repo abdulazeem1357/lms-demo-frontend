@@ -1,11 +1,56 @@
 [
   {
     "id": "l1py1",
-    "moduleId": "m1n2o3p4-q5r6-s7t8-u9v0-w1x2y3z4a5b6", 
+    "moduleId": "m1n2o3p4-q5r6-s7t8-u9v0-w1x2y3z4a5b6",
     "bunnyVideoId": "vid_python_intro",
     "title": "Lecture 1.1: Introduction to Python",
     "description": "An overview of Python programming and its applications.",
     "duration": 1200,
     "createdAt": "2025-05-01T10:00:00Z"
+  },
+  {
+    "id": "l1js1",
+    "moduleId": "m-js-intro-1",
+    "bunnyVideoId": "vid_js_vars",
+    "title": "Lecture 1.1: JS Variables & Scope",
+    "description": "Understanding var, let, const, and scope in JavaScript.",
+    "duration": 950,
+    "createdAt": "2025-05-02T11:10:00Z"
+  },
+  {
+    "id": "l2js1",
+    "moduleId": "m-js-intro-1",
+    "bunnyVideoId": "vid_js_funcs",
+    "title": "Lecture 1.2: JS Functions & Closures",
+    "description": "Exploring function declarations, expressions, and closures.",
+    "duration": 1100,
+    "createdAt": "2025-05-02T11:30:00Z"
+  },
+  {
+    "id": "l1react1",
+    "moduleId": "m-react-state-1",
+    "bunnyVideoId": "vid_react_zustand",
+    "title": "Lecture 1.1: Intro to Zustand",
+    "description": "A simple and powerful state management solution for React.",
+    "duration": 1500,
+    "createdAt": "2025-05-03T12:15:00Z"
+  },
+  {
+    "id": "l1ds1",
+    "moduleId": "m-ds-pandas-1",
+    "bunnyVideoId": "vid_ds_pandas_intro",
+    "title": "Lecture 1.1: Pandas DataFrames",
+    "description": "Getting started with Pandas DataFrames for data manipulation.",
+    "duration": 1350,
+    "createdAt": "2025-05-04T13:20:00Z"
+  },
+  {
+    "id": "l3js2",
+    "moduleId": "m-js-dom-2",
+    "bunnyVideoId": "vid_js_dom_events",
+    "title": "Lecture 2.1: Handling DOM Events",
+    "description": "Learn how to effectively handle user interactions using DOM events.",
+    "duration": 1050,
+    "createdAt": "2025-05-05T14:00:00Z"
   }
 ]

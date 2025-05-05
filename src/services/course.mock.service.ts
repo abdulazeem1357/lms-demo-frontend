@@ -14,6 +14,7 @@ import {
   ICourseMaterial,
   ICourseMaterialListResponse,
   ILecture,
+  ILectureListResponse, // <-- Import this type
   ILiveLecture,
   IQuiz,
   IAssignment
@@ -52,6 +53,22 @@ export async function getCourseById(courseId: string): Promise<ICourse> {
 
 export async function getCourseModules(courseId: string): Promise<IModule[]> {
   return Promise.resolve(getModulesByCourseId(courseId));
+}
+
+/**
+ * Mock implementation to get all lectures for a given course.
+ * It finds the modules for the course and then aggregates lectures from those modules.
+ * @param courseId - The ID of the course.
+ * @returns A promise resolving to an object containing the list of lectures.
+ */
+export async function getCourseLectures(courseId: string): Promise<ILectureListResponse> {
+  const modules = getModulesByCourseId(courseId);
+  const moduleIds = modules.map(m => m.id);
+  const allLectures = lectures as ILecture[];
+
+  const courseLectures = allLectures.filter(lecture => moduleIds.includes(lecture.moduleId));
+
+  return Promise.resolve({ data: courseLectures });
 }
 
 export async function getCourseMaterials(courseId: string): Promise<ICourseMaterial[]> {

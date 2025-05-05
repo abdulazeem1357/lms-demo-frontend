@@ -2,10 +2,28 @@
   {
     "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
     "moduleId": "m1n2o3p4-q5r6-s7t8-u9v0-w1x2y3z4a5b6",
-    "title": "Assignment 1: Python Basics",
+    "title": "Assignment 1: Python Factorial",
     "description": "Write a Python script to calculate the factorial of a number.",
     "dueDate": "2025-05-10T23:59:00Z",
     "createdAt": "2025-05-01T10:00:00Z",
     "updatedAt": "2025-05-01T10:00:00Z"
+  },
+  {
+    "id": "assign-js-dom-1",
+    "moduleId": "m-js-dom-2",
+    "title": "Assignment 1: Simple To-Do List",
+    "description": "Create a simple to-do list application using vanilla JavaScript and DOM manipulation.",
+    "dueDate": "2025-05-15T23:59:00Z",
+    "createdAt": "2025-05-05T11:00:00Z",
+    "updatedAt": "2025-05-05T11:00:00Z"
+  },
+  {
+    "id": "assign-react-zustand-1",
+    "moduleId": "m-react-state-1",
+    "title": "Assignment 1: Zustand Counter",
+    "description": "Build a simple counter component using React and manage its state with Zustand.",
+    "dueDate": "2025-05-18T23:59:00Z",
+    "createdAt": "2025-05-05T12:00:00Z",
+    "updatedAt": "2025-05-05T12:00:00Z"
   }
 ]

@@ -12,6 +12,10 @@ export const getCourseModules = useMocks ? mock.getCourseModules : real.getCours
 export const createCourseModule = useMocks ? mock.createCourseModule : real.createCourseModule;
 export const updateCourseModule = useMocks ? mock.updateCourseModule : real.updateCourseModule;
 export const deleteCourseModule = useMocks ? mock.deleteCourseModule : real.deleteCourseModule;
+
+// Add getCourseLectures export
+export const getCourseLectures = useMocks ? mock.getCourseLectures : real.getCourseLectures;
+
 export const getModuleLectures = useMocks ? mock.getModuleLectures : real.getModuleLectures;
 export const createModuleLecture = useMocks ? mock.createModuleLecture : real.createModuleLecture;
 export const updateLecture = useMocks ? mock.updateLecture : real.updateLecture;
