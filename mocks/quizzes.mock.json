@@ -1,10 +1,39 @@
 [
   {
-    "id": "q1r2s3t4-u5v6-w7x8-y9z0-a1b2c3d4e5f6",
+    "id": "quiz-demo-1",
     "moduleId": "m1n2o3p4-q5r6-s7t8-u9v0-w1x2y3z4a5b6",
-    "title": "Quiz 1: Python Basics",
-    "description": "Test your knowledge of Python syntax and basic programming concepts.",
-    "createdAt": "2025-05-01T10:00:00Z",
-    "updatedAt": "2025-05-01T10:00:00Z"
+    "title": "Demo Quiz: Python Basics",
+    "description": "A sample quiz for testing the QuizPage UI with Python syntax and basic programming questions.",
+    "createdAt": "2025-05-04T10:00:00Z",
+    "updatedAt": "2025-05-04T10:00:00Z",
+    "timeLimit": 180,
+    "questions": [
+      {
+        "id": "q1",
+        "quizId": "quiz-demo-1",
+        "type": "single_choice",
+        "text": "What is the correct file extension for Python files?",
+        "options": [
+          { "id": "a", "text": ".py" },
+          { "id": "b", "text": ".python" },
+          { "id": "c", "text": ".pyt" }
+        ],
+        "order": 1
+      },
+      {
+        "id": "q2",
+        "quizId": "quiz-demo-1",
+        "type": "true_false",
+        "text": "Python is a statically typed language.",
+        "order": 2
+      },
+      {
+        "id": "q3",
+        "quizId": "quiz-demo-1",
+        "type": "short_answer",
+        "text": "Write a Python statement to print 'Hello, World!'.",
+        "order": 3
+      }
+    ]
   }
 ]
