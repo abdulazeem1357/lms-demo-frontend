@@ -43,17 +43,17 @@ export function setAuthToken(token: string | null): void {
   }
 }
 
-// Mock dummy user for development
+// Mock dummy user for development - Use the ID from users.mock.json
 const DUMMY_USER: IUser = {
-  id: 'dev-user-id',
-  username: 'dev_user',
-  email: 'dev@example.com',
-  firstName: 'Dev',
-  lastName: 'User',
+  id: 'a1b2c3d4-e5f6-7890-1234-567890abcdef', // <-- Use the ID from mock files
+  username: 'alice_student',                  // <-- Use username from mock files
+  email: 'alice.student@lms-example.com',     // <-- Use email from mock files
+  firstName: 'Alice',                         // <-- Use firstName from mock files
+  lastName: 'Wonder',                         // <-- Use lastName from mock files
   role: 'Student',
   isActive: true,
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString()
+  createdAt: '2025-05-01T10:00:00Z', // Use consistent date if needed
+  updatedAt: '2025-05-01T10:00:00Z'  // Use consistent date if needed
 };
 
 // Mock auth service functions - replace with real API calls
